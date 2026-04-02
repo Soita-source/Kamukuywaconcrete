@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kamukuywa concrete limited — Sand & Poles Delivered in Kenya</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+
+
+<!-- ========== NAVBAR ========== -->
+<nav class="fixed top-0 left-0 right-0 z-50 h-16 flex items-center border-b border-white/5" style="background: rgba(5,5,5,0.85); backdrop-filter: blur(24px);">
+    <div class="max-w-7xl mx-auto w-full px-6 flex items-center justify-between">
+        <a href="#" class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-lg bg-orange-500/20 flex items-center justify-center">
+                <span class="iconify text-orange-500" data-icon="mdi:dump-truck" data-width="18"></span>
+            </div>
+            <span class="text-sm font-semibold tracking-tight">Kamukuywa concrete limited</span>
+        </a>
+        <div class="hidden md:flex items-center gap-8">
+            <a href="#products" class="text-xs font-medium text-stone-400 hover:text-white transition-colors duration-150">Products</a>
+            <a href="#how-it-works" class="text-xs font-medium text-stone-400 hover:text-white transition-colors duration-150">How It Works</a>
+            <a href="#pricing" class="text-xs font-medium text-stone-400 hover:text-white transition-colors duration-150">Pricing</a>
+            <a href="#faq" class="text-xs font-medium text-stone-400 hover:text-white transition-colors duration-150">FAQ</a>
+        </div>
+        <div class="flex items-center gap-3">
+            <button onclick="openOrderModal()" class="bg-white text-black text-xs font-medium px-4 py-2 rounded-lg hover:bg-stone-200 transition-all duration-150">
+                Order Now
+            </button>
+            <button onclick="toggleMobileMenu()" class="md:hidden text-stone-400 hover:text-white transition-colors">
+                <span class="iconify" data-icon="mdi:menu" data-width="22"></span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+
+
+
+
+<!-- Mobile Menu -->
+<div id="mobileMenu" class="fixed inset-0 z-40 hidden" style="background: rgba(5,5,5,0.95); backdrop-filter: blur(24px);">
+    <div class="pt-20 px-6 flex flex-col gap-6">
+        <a href="#products" onclick="toggleMobileMenu()" class="text-lg font-medium text-stone-300 hover:text-white transition-colors">Products</a>
+        <a href="#how-it-works" onclick="toggleMobileMenu()" class="text-lg font-medium text-stone-300 hover:text-white transition-colors">How It Works</a>
+        <a href="#pricing" onclick="toggleMobileMenu()" class="text-lg font-medium text-stone-300 hover:text-white transition-colors">Pricing</a>
+        <a href="#faq" onclick="toggleMobileMenu()" class="text-lg font-medium text-stone-300 hover:text-white transition-colors">FAQ</a>
+        <button onclick="toggleMobileMenu(); openOrderModal();" class="bg-white text-black text-sm font-medium px-6 py-3 rounded-lg mt-4">Order Now</button>
+    </div>
+</div>
+
+
+
+
+
+<!-- ========== HERO ========== -->
+<section class="relative pt-40 md:pt-48 pb-20 md:pb-32 px-6 overflow-hidden">
+    <!-- Background effects -->
+    <div class="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[300px] glow-orange opacity-30 pointer-events-none"></div>
+    <div class="absolute top-0 left-0 right-0 bottom-0 pointer-events-none" style="background: radial-gradient(ellipse at top, rgba(249,115,22,0.08), transparent 60%);"></div>
+
+    <div class="max-w-5xl mx-auto text-center relative z-10">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.02] mb-8 animate-fadeInUp">
+            <span class="relative flex h-2 w-2">
+                <span class="absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75" style="animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            </span>
+            <span class="text-xs font-medium text-stone-400">Delivering across central & Western regions</span>
+        </div>
+
+        <h1 class="text-5xl md:text-7xl font-medium leading-[1.05] tracking-tight text-gradient mb-6 animate-fadeInUp" style="animation-delay: 0.1s;">
+            Building Materials<br>
+            <span class="text-orange-500" style="-webkit-text-fill-color: #f97316;">Delivered to Site</span>
+        </h1>
+
+        <p class="text-sm md:text-base font-light text-stone-400 leading-relaxed max-w-2xl mx-auto mb-10 animate-fadeInUp" style="animation-delay: 0.2s;">
+            Quality sand and construction poles delivered straight to your site. 
+            Pay conveniently with M-Pesa. No delays, no hassle — just materials when you need them.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fadeInUp" style="animation-delay: 0.3s;">
+            <button onclick="openOrderModal()" class="shiny-btn text-white text-sm font-medium px-8 py-3.5 rounded-xl hover:opacity-90 transition-opacity duration-150">
+                <span class="relative z-10 flex items-center gap-2">
+                    <span class="iconify" data-icon="mdi:cart-outline" data-width="18"></span>
+                    Place Order
+                </span>
+            </button>
+            <a href="#products" class="flex items-center gap-2 text-sm font-medium text-stone-400 hover:text-white px-6 py-3.5 rounded-xl border border-white/5 hover:border-white/10 transition-all duration-150">
+                View Products
+                <span class="iconify" data-icon="mdi:arrow-down" data-width="16"></span>
+            </a>
+        </div>
+
+
+
+
+
+        <!-- Stats -->
+        <div class="grid grid-cols-3 gap-8 mt-16 pt-10 border-t border-white/5 max-w-lg mx-auto animate-fadeInUp" style="animation-delay: 0.4s;">
+            <div>
+                <div class="text-2xl font-semibold text-white">5K+</div>
+                <div class="text-xs text-stone-500 mt-1">Orders Delivered</div>
+            </div>
+            <div>
+                <div class="text-2xl font-semibold text-white">24hr</div>
+                <div class="text-xs text-stone-500 mt-1">Avg. Delivery</div>
+            </div>
+            <div>
+                <div class="text-2xl font-semibold text-white">4.9★</div>
+                <div class="text-xs text-stone-500 mt-1">Customer Rating</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<!-- ========== TRUSTED BY ========== -->
+<section class="py-12 px-6 border-y border-white/5">
+    <div class="max-w-5xl mx-auto text-center">
+        <p class="text-xs text-stone-600 uppercase tracking-widest mb-6">Trusted by construction sites across</p>
+        <div class="flex flex-wrap items-center justify-center gap-8 md:gap-14">
+            <span class="text-stone-600 text-sm font-medium">Bungoma</span>
+            <span class="text-stone-700">•</span>
+            <span class="text-stone-600 text-sm font-medium">Nairobi</span>
+            <span class="text-stone-700">•</span>
+            <span class="text-stone-600 text-sm font-medium">Kiambu</span>
+            <span class="text-stone-700">•</span>
+            <span class="text-stone-600 text-sm font-medium">Tranzoia</span>
+            <span class="text-stone-700">•</span>
+            <span class="text-stone-600 text-sm font-medium">Kakamega</span>
+            <span class="text-stone-700">•</span>
+            <span class="text-stone-600 text-sm font-medium">Nakuru</span>
+        </div>
+    </div>
+</section>
+
+
+
+
+<!-- ========== PRODUCTS ========== -->
+<section id="products" class="py-24 px-6">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-orange-500/20 bg-orange-500/5 mb-4">
+                <span class="text-xs font-medium text-orange-400">Our Products</span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-gradient mb-4">Quality Materials, Fair Prices</h2>
+            <p class="text-sm text-stone-400 font-light max-w-xl mx-auto">Sourced from trusted quarries and concrete. Every load inspected before delivery.</p>
+        </div>
+
+
+
+
+        <!-- Sand Products -->
+        <div class="mb-12">
+            <h3 class="text-lg font-medium text-white mb-6 flex items-center gap-2">
+                <span class="iconify text-orange-500" data-icon="mdi:grain" data-width="20"></span>
+                Sand
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- River Sand -->
+                <div class="glass-card rounded-xl p-6 cursor-pointer product-card" data-product="river-sand" data-price="3500" data-unit="tonne" onclick="toggleProduct(this)">
+                    <div class="w-full h-40 rounded-lg mb-4 overflow-hidden bg-stone-900/50">
+                        <img src="images/WhatsApp Image 2026-03-31 at 13.42.39.jpeg" alt="River Sand" class="w-full h-full object-cover opacity-70 hover:opacity-90 transition-opacity duration-300">
+                    </div>
+                    <div class="flex items-start justify-between mb-3">
+                        <div>
+                            <h4 class="text-sm font-medium text-white">River Sand</h4>
+                            <p class="text-xs text-stone-500 mt-1">Smooth, well-graded — ideal for plastering & concrete</p>
+                        </div>
+                        <div class="w-6 h-6 rounded-full border border-white/10 flex items-center justify-center product-check transition-all">
+                            <span class="iconify text-orange-500 opacity-0" data-icon="mdi:check" data-width="14"></span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-lg font-semibold text-white">KES 3,500</span>
+                        <span class="text-xs text-stone-500">per tonne</span>
+                    </div>
+                </div>
+
+
+
+
+                <!-- Ballast Sand -->
+                <div class="glass-card rounded-xl p-6 cursor-pointer product-card" data-product="ballast" data-price="4000" data-unit="tonne" onclick="toggleProduct(this)">
+                    <div class="w-full h-40 rounded-lg mb-4 overflow-hidden bg-stone-900/50">
+                        <img src="images/WhatsApp Image 2026-03-31 at 13.42.39 (1).jpeg" alt="Ballast" class="w-full h-full object-cover opacity-70 hover:opacity-90 transition-opacity duration-300">
+                    </div>
+                    <div class="flex items-start justify-between mb-3">
+                        <div>
+                            <h4 class="text-sm font-medium text-white">Ballast (Aggregates)</h4>
+                            <p class="text-xs text-stone-500 mt-1">Crushed stone — essential for foundation & slabs</p>
+                        </div>
+                        <div class="w-6 h-6 rounded-full border border-white/10 flex items-center justify-center product-check transition-all">
+                            <span class="iconify text-orange-500 opacity-0" data-icon="mdi:check" data-width="14"></span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-lg font-semibold text-white">KES 4,000</span>
+                        <span class="text-xs text-stone-500">per tonne</span>
+                    </div>
+                </div>
+
+
+
+                <!-- Building Sand -->
+                <div class="glass-card rounded-xl p-6 cursor-pointer product-card" data-product="building-sand" data-price="2800" data-unit="tonne" onclick="toggleProduct(this)">
+                    <div class="w-full h-40 rounded-lg mb-4 overflow-hidden bg-stone-900/50">
+                        <img src="images/WhatsApp Image 2026-03-31 at 13.42.40.jpeg" alt="Building Sand" class="w-full h-full object-cover opacity-70 hover:opacity-90 transition-opacity duration-300">
+                    </div>
+                    <div class="flex items-start justify-between mb-3">
+                        <div>
+                            <h4 class="text-sm font-medium text-white">Building Sand</h4>
+                            <p class="text-xs text-stone-500 mt-1">Coarse sand — perfect for mortar & block making</p>
+                        </div>
+                        <div class="w-6 h-6 rounded-full border border-white/10 flex items-center justify-center product-check transition-all">
+                            <span class="iconify text-orange-500 opacity-0" data-icon="mdi:check" data-width="14"></span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-lg font-semibold text-white">KES 2,800</span>
+                        <span class="text-xs text-stone-500">per tonne</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <!-- Poles Products -->
+        <div>
+            <h3 class="text-lg font-medium text-white mb-6 flex items-center gap-2">
+                <span class="iconify text-orange-500" data-icon="mdi:fence" data-width="20"></span>
+                Construction Poles
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Concrete Poles -->
+                <div class="glass-card rounded-xl p-6 cursor-pointer product-card" data-product="concrete-poles" data-price="350" data-unit="piece" onclick="toggleProduct(this)">
+                    <div class="w-full h-40 rounded-lg mb-4 overflow-hidden bg-stone-900/50">
+                        <img src="images/WhatsApp Image 2026-03-31 at 13.42.39.jpeg" alt="Eucalyptus Poles" class="w-full h-full object-cover opacity-70 hover:opacity-90 transition-opacity duration-300">
+                    </div>
+                    <div class="flex items-start justify-between mb-3">
+                        <div>
+                            <h4 class="text-sm font-medium text-white">concrete poles</h4>
+                            <p class="text-xs text-stone-500 mt-1">strong & high durability</p>
+                        </div>
+                        <div class="w-6 h-6 rounded-full border border-white/10 flex items-center justify-center product-check transition-all">
+                            <span class="iconify text-orange-500 opacity-0" data-icon="mdi:check" data-width="14"></span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-lg font-semibold text-white">KES 350</span>
+                        <span class="text-xs text-stone-500">per piece (6ft)</span>
+                    </div>
+                </div>
+
+                <!-- Concrete Poles -->
+                <div class="glass-card rounded-xl p-6 cursor-pointer product-card" data-product="concrete-poles" data-price="500" data-unit="piece" onclick="toggleProduct(this)">
+                    <div class="w-full h-40 rounded-lg mb-4 overflow-hidden bg-stone-900/50">
+                        <img src="images/WhatsApp Image 2026-03-31 at 13.42.40.jpeg" alt="Concrete Poles" class="w-full h-full object-cover opacity-70 hover:opacity-90 transition-opacity duration-300">
+                    </div>
+                    <div class="flex items-start justify-between mb-3">
+                        <div>
+                            <h4 class="text-sm font-medium text-white">Concrete Poles</h4>
+                            <p class="text-xs text-stone-500 mt-1">Premium —  durable, straight </p>
+                        </div>
+                        <div class="w-6 h-6 rounded-full border border-white/10 flex items-center justify-center product-check transition-all">
+                            <span class="iconify text-orange-500 opacity-0" data-icon="mdi:check" data-width="14"></span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-lg font-semibold text-white">KES 500</span>
+                        <span class="text-xs text-stone-500">per piece (6ft)</span>
+                    </div>
+                </div>
+
+                <!-- Round Posts -->
+                <div class="glass-card rounded-xl p-6 cursor-pointer product-card" data-product="round-posts" data-price="800" data-unit="piece" onclick="toggleProduct(this)">
+                    <div class="w-full h-40 rounded-lg mb-4 overflow-hidden bg-stone-900/50">
+                        <img src="images/WhatsApp Image 2026-03-31 at 13.42.40.jpeg" alt="Round Posts" class="w-full h-full object-cover opacity-70 hover:opacity-90 transition-opacity duration-300">
+                    </div>
+                    <div class="flex items-start justify-between mb-3">
+                        <div>
+                            <h4 class="text-sm font-medium text-white">Heavy-Duty Posts</h4>
+                            <p class="text-xs text-stone-500 mt-1">10ft+ — for fencing, scaffolding & temporary structures</p>
+                        </div>
+                        <div class="w-6 h-6 rounded-full border border-white/10 flex items-center justify-center product-check transition-all">
+                            <span class="iconify text-orange-500 opacity-0" data-icon="mdi:check" data-width="14"></span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-lg font-semibold text-white">KES 800</span>
+                        <span class="text-xs text-stone-500">per piece (10ft)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+<!-- ========== HOW IT WORKS ========== -->
+<section id="how-it-works" class="py-24 px-6 relative">
+    <div class="absolute inset-0 glow-orange opacity-10 pointer-events-none"></div>
+    <div class="max-w-5xl mx-auto relative z-10">
+        <div class="text-center mb-16">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-orange-500/20 bg-orange-500/5 mb-4">
+                <span class="text-xs font-medium text-orange-400">Simple Process</span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-gradient mb-4">How It Works</h2>
+            <p class="text-sm text-stone-400 font-light max-w-xl mx-auto">From order to delivery in 4 simple steps</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="text-center relative">
+                <div class="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center mx-auto mb-4">
+                    <span class="text-orange-500 font-semibold text-sm">01</span>
+                </div>
+                <h4 class="text-sm font-medium text-white mb-2">Select Materials</h4>
+                <p class="text-xs text-stone-500 leading-relaxed">Choose your sand type, poles, and quantity</p>
+                <div class="hidden md:block absolute top-6 left-[60%] w-[80%] h-px bg-gradient-to-r from-orange-500/30 to-transparent"></div>
+            </div>
+            <div class="text-center relative">
+                <div class="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center mx-auto mb-4">
+                    <span class="text-orange-500 font-semibold text-sm">02</span>
+                </div>
+                <h4 class="text-sm font-medium text-white mb-2">Enter Location</h4>
+                <p class="text-xs text-stone-500 leading-relaxed">Provide your site address & environs</p>
+                <div class="hidden md:block absolute top-6 left-[60%] w-[80%] h-px bg-gradient-to-r from-orange-500/30 to-transparent"></div>
+            </div>
+            <div class="text-center relative">
+                <div class="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center mx-auto mb-4">
+                    <span class="text-orange-500 font-semibold text-sm">03</span>
+                </div>
+                <h4 class="text-sm font-medium text-white mb-2">Pay via M-Pesa</h4>
+                <p class="text-xs text-stone-500 leading-relaxed">STK Push — just enter your number and confirm</p>
+                <div class="hidden md:block absolute top-6 left-[60%] w-[80%] h-px bg-gradient-to-r from-orange-500/30 to-transparent"></div>
+            </div>
+            <div class="text-center">
+                <div class="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center mx-auto mb-4">
+                    <span class="iconify text-green-500" data-icon="mdi:truck-delivery" data-width="20"></span>
+                </div>
+                <h4 class="text-sm font-medium text-white mb-2">Delivered to Site</h4>
+                <p class="text-xs text-stone-500 leading-relaxed">Truck arrives within 24hrs — we offload for you</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<!-- ========== PRICING TABLE ========== -->
+<section id="pricing" class="py-24 px-6">
+    <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-orange-500/20 bg-orange-500/5 mb-4">
+                <span class="text-xs font-medium text-orange-400">Transparent Pricing</span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-gradient mb-4">Price List</h2>
+            <p class="text-sm text-stone-400 font-light max-w-xl mx-auto">Delivery fee calculated based on distance from depot</p>
+        </div>
+
+        <div class="glass-card rounded-2xl overflow-hidden">
+            <table class="w-full">
+                <thead>
+                    <tr class="border-b border-white/5">
+                        <th class="text-left text-xs font-medium text-stone-500 uppercase tracking-wider px-6 py-4">Material</th>
+                        <th class="text-left text-xs font-medium text-stone-500 uppercase tracking-wider px-6 py-4">Unit</th>
+                        <th class="text-right text-xs font-medium text-stone-500 uppercase tracking-wider px-6 py-4">Price (KES)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                        <td class="px-6 py-4 text-sm text-white flex items-center gap-2">
+                            <span class="iconify text-stone-600" data-icon="mdi:grain" data-width="16"></span>
+                            River Sand
+                        </td>
+                        <td class="px-6 py-4 text-sm text-stone-400">Per Tonne</td>
+                        <td class="px-6 py-4 text-sm text-white font-medium text-right">3,500</td>
+                    </tr>
+                    <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                        <td class="px-6 py-4 text-sm text-white flex items-center gap-2">
+                            <span class="iconify text-stone-600" data-icon="mdi:grain" data-width="16"></span>
+                            Building Sand
+                        </td>
+                        <td class="px-6 py-4 text-sm text-stone-400">Per Tonne</td>
+                        <td class="px-6 py-4 text-sm text-white font-medium text-right">2,800</td>
+                    </tr>
+                    <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                        <td class="px-6 py-4 text-sm text-white flex items-center gap-2">
+                            <span class="iconify text-stone-600" data-icon="mdi:cube-outline" data-width="16"></span>
+                            Ballast
+                        </td>
+                        <td class="px-6 py-4 text-sm text-stone-400">Per Tonne</td>
+                        <td class="px-6 py-4 text-sm text-white font-medium text-right">4,000</td>
+                    </tr>
+                    <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                        <td class="px-6 py-4 text-sm text-white flex items-center gap-2">
+                            <span class="iconify text-stone-600" data-icon="mdi:fence" data-width="16"></span>
+                            Ballast Poles (6ft)
+                        </td>
+                        <td class="px-6 py-4 text-sm text-stone-400">Per Piece</td>
+                        <td class="px-6 py-4 text-sm text-white font-medium text-right">350</td>
+                    </tr>
+                    <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                        <td class="px-6 py-4 text-sm text-white flex items-center gap-2">
+                            <span class="iconify text-stone-600" data-icon="mdi:fence" data-width="16"></span>
+                            Concrete Poles (6ft)
+                        </td>
+                        <td class="px-6 py-4 text-sm text-stone-400">Per Piece</td>
+                        <td class="px-6 py-4 text-sm text-white font-medium text-right">500</td>
+                    </tr>
+                    <tr class="hover:bg-white/[0.02] transition-colors">
+                        <td class="px-6 py-4 text-sm text-white flex items-center gap-2">
+                            <span class="iconify text-stone-600" data-icon="mdi:fence" data-width="16"></span>
+                            Heavy-Duty Posts (10ft)
+                        </td>
+                        <td class="px-6 py-4 text-sm text-stone-400">Per Piece</td>
+                        <td class="px-6 py-4 text-sm text-white font-medium text-right">800</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+
+            <!-- Delivery fee note -->
+            <div class="px-6 py-4 bg-white/[0.02] border-t border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+                <div class="flex items-center gap-2 text-xs text-stone-500">
+                    <span class="iconify text-orange-500" data-icon="mdi:truck-outline" data-width="14"></span>
+                    <span>Delivery: KES 2,000 – 5,000 (within Western region) | KES 5,000 – 10,000 (outside Western region)</span>
+                </div>
+                <span class="text-xs text-stone-600">Free offloading included</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<!-- ========== TESTIMONIALS ========== -->
+<section class="py-24 px-6 border-t border-white/5">
+    <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-orange-500/20 bg-orange-500/5 mb-4">
+                <span class="text-xs font-medium text-orange-400">Testimonials</span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-gradient">What Builders Say</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="glass-card rounded-xl p-6">
+                <div class="flex items-center gap-1 mb-4">
+                    <span class="iconify text-orange-500" data-icon="mdi:star" data-width="14"></span>
+                    <span class="iconify text-orange-500" data-icon="mdi:star" data-width="14"></span>
+                    <span class="iconify text-orange-500" data-icon="mdi:star" data-width="14"></span>
+                    <span class="iconify text-orange-500" data-icon="mdi:star" data-width="14"></span>
+                    <span class="iconify text-orange-500" data-icon="mdi:star" data-width="14"></span>
+                </div>
+                <p class="text-sm text-stone-300 font-light leading-relaxed mb-4">"Ordered 5 tonnes of river sand for my project in Kisumu. Delivered the next morning, well-measured. The M-Pesa payment was so smooth."</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-stone-800 flex items-center justify-center text-xs font-medium text-stone-400">JK</div>
+                    <div>
+                        <div class="text-xs font-medium text-white">James Ochieng</div>
+                        <div class="text-xs text-stone-600">Contractor, Kisumu</div>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-card rounded-xl p-6">
+                <div class="flex items-center gap-1 mb-4">
+                    <span class="iconify text-orange-500" data-icon="mdi:star" data-width="14"></span>
+                    <span class="iconify text-orange-500" data-icon="mdi:star" data-width="14"></span>
+                    <span class="iconify text-orange-500" data-icon="mdi:star" data-width="14"></span>
+                    <span class="iconify text-orange-500" data-icon="mdi:star" data-width="14"></span>
+                    <span class="iconify text-orange-500" data-icon="mdi:star" data-width="14"></span>
+                </div>
+                <p class="text-sm text-stone-300 font-light leading-relaxed mb-4">"Best concrete poles I've found in Kenya. Straight and strong. I've ordered three times now — consistent quality."</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-stone-800 flex items-center justify-center text-xs font-medium text-stone-400">AW</div>
+                    <div>
+                        <div class="text-xs font-medium text-white">Ann Nafula</div>
+                        <div class="text-xs text-stone-600">Developer, Rongai</div>
+                    </div>
+                </div>
+            </div>
+            <div class="glass-card rounded-xl p-6">
+                <div class="flex items-center gap-1 mb-4">
+                    <span class="iconify text-orange-500" data-icon="mdi:star" data-width="14"></span>
+                    <span class="iconify text-orange-500" data-icon="mdi:star" data-width="14"></span>
+                    <span class="iconify text-orange-500" data-icon="mdi:star" data-width="14"></span>
+                    <span class="iconify text-orange-500" data-icon="mdi:star" data-width="14"></span>
+                    <span class="iconify text-orange-500" data-icon="mdi:star-half-full" data-width="14"></span>
+                </div>
+                <p class="text-sm text-stone-300 font-light leading-relaxed mb-4">"As a homeowner building my first house, they guided me on exactly what I needed. Ballast and sand came together. Highly recommend!"</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-stone-800 flex items-center justify-center text-xs font-medium text-stone-400">PO</div>
+                    <div>
+                        <div class="text-xs font-medium text-white">Peter Kariuki</div>
+                        <div class="text-xs text-stone-600">Homeowner, Nairobi</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+<!-- ========== FAQ ========== -->
+<section id="faq" class="py-24 px-6 border-t border-white/5">
+    <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-16">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-orange-500/20 bg-orange-500/5 mb-4">
+                <span class="text-xs font-medium text-orange-400">FAQ</span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-gradient">Common Questions</h2>
+        </div>
+
+        <div class="space-y-3" id="faqContainer">
+            <div class="faq-item glass-card rounded-xl overflow-hidden">
+                <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-6 py-4 text-left">
+                    <span class="text-sm font-medium text-white">How fast is delivery?</span>
+                    <span class="iconify text-stone-500 transition-transform duration-200 faq-icon" data-icon="mdi:chevron-down" data-width="18"></span>
+                </button>
+                <div class="faq-answer px-6 pb-4 hidden">
+                    <p class="text-sm text-stone-400 font-light leading-relaxed">We deliver within 24 hours for orders placed before 2 PM. Same-day delivery is available within Western region for orders placed before 10 AM at a small surcharge.</p>
+                </div>
+            </div>
+            <div class="faq-item glass-card rounded-xl overflow-hidden">
+                <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-6 py-4 text-left">
+                    <span class="text-sm font-medium text-white">How does M-Pesa payment work?</span>
+                    <span class="iconify text-stone-500 transition-transform duration-200 faq-icon" data-icon="mdi:chevron-down" data-width="18"></span>
+                </button>
+                <div class="faq-answer px-6 pb-4 hidden">
+                    <p class="text-sm text-stone-400 font-light leading-relaxed">When you place an order, you'll enter your M-Pesa phone number. We send an STK Push to your phone — you just enter your PIN to confirm. No need to go to the M-Pesa menu.</p>
+                </div>
+            </div>
+            <div class="faq-item glass-card rounded-xl overflow-hidden">
+                <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-6 py-4 text-left">
+                    <span class="text-sm font-medium text-white">What areas do you deliver to?</span>
+                    <span class="iconify text-stone-500 transition-transform duration-200 faq-icon" data-icon="mdi:chevron-down" data-width="18"></span>
+                </button>
+                <div class="faq-answer px-6 pb-4 hidden">
+                    <p class="text-sm text-stone-400 font-light leading-relaxed">We deliver across Nairobi, Kiambu,Tranzoia, Kisumu, and Nakuru. For locations beyond 50km from Kamukuywa, contact us for a custom quote.</p>
+                </div>
+            </div>
+            <div class="faq-item glass-card rounded-xl overflow-hidden">
+                <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-6 py-4 text-left">
+                    <span class="text-sm font-medium text-white">Can I return materials if they don't meet standards?</span>
+                    <span class="iconify text-stone-500 transition-transform duration-200 faq-icon" data-icon="mdi:chevron-down" data-width="18"></span>
+                </button>
+                <div class="faq-answer px-6 pb-4 hidden">
+                    <p class="text-sm text-stone-400 font-light leading-relaxed">Yes. If materials are not as described (wrong sand type, damaged poles, short weight), we'll replace them at no extra cost or issue a full refund. Report within 2 hours of delivery.</p>
+                </div>
+            </div>
+            <div class="faq-item glass-card rounded-xl overflow-hidden">
+                <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-6 py-4 text-left">
+                    <span class="text-sm font-medium text-white">Do you offload at the site?</span>
+                    <span class="iconify text-stone-500 transition-transform duration-200 faq-icon" data-icon="mdi:chevron-down" data-width="18"></span>
+                </button>
+                <div class="faq-answer px-6 pb-4 hidden">
+                    <p class="text-sm text-stone-400 font-light leading-relaxed">Yes! Free offloading is included for all sand orders. For poles, we help unload by hand. For hard-to-access sites, let us know in advance so we can plan appropriately.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+<!-- ========== CTA ========== -->
+<section class="py-24 px-6 relative">
+    <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse at center, rgba(249,115,22,0.1), transparent 60%);"></div>
+    <div class="max-w-3xl mx-auto text-center relative z-10">
+        <h2 class="text-3xl md:text-4xl font-medium tracking-tight text-gradient mb-4">Ready to Order?</h2>
+        <p class="text-sm text-stone-400 font-light max-w-lg mx-auto mb-8">Get quality sand and poles delivered to your construction site. Pay with M-Pesa — it takes less than 2 minutes.</p>
+        <button onclick="openOrderModal()" class="bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium px-8 py-3.5 rounded-xl transition-colors duration-150 inline-flex items-center gap-2">
+            <span class="iconify" data-icon="mdi:cart-outline" data-width="18"></span>
+            Place Your Order Now
+        </button>
+        <div class="flex items-center justify-center gap-6 mt-6 text-xs text-stone-600">
+            <span class="flex items-center gap-1.5">
+                <span class="iconify text-green-500" data-icon="mdi:shield-check" data-width="14"></span>
+                Secure Payment
+            </span>
+            <span class="flex items-center gap-1.5">
+                <span class="iconify text-green-500" data-icon="mdi:truck-check" data-width="14"></span>
+                Guaranteed Delivery
+            </span>
+            <span class="flex items-center gap-1.5">
+                <span class="iconify text-green-500" data-icon="mdi:cash-refund" data-width="14"></span>
+                Money-Back Promise
+            </span>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+<!-- ========== FOOTER ========== -->
+<footer class="border-t border-white/5 py-12 px-6">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
+            <div>
+                <div class="flex items-center gap-2.5 mb-4">
+                    <div class="w-8 h-8 rounded-lg bg-orange-500/20 flex items-center justify-center">
+                        <span class="iconify text-orange-500" data-icon="mdi:dump-truck" data-width="18"></span>
+                    </div>
+                    <span class="text-sm font-semibold tracking-tight">Kamukuywa concrete limited</span>
+                </div>
+                <p class="text-xs text-stone-500 leading-relaxed">Quality construction sand and poles delivered to your site across Kenya. Pay with M-Pesa.</p>
+            </div>
+            <div>
+                <h5 class="text-xs font-medium text-white uppercase tracking-wider mb-4">Products</h5>
+                <ul class="space-y-2">
+                    <li><a href="#products" class="text-xs text-stone-500 hover:text-orange-400 transition-colors">River Sand</a></li>
+                    <li><a href="#products" class="text-xs text-stone-500 hover:text-orange-400 transition-colors">Building Sand</a></li>
+                    <li><a href="#products" class="text-xs text-stone-500 hover:text-orange-400 transition-colors">Ballast</a></li>
+                    <li><a href="#products" class="text-xs text-stone-500 hover:text-orange-400 transition-colors">Concrete Poles</a></li>
+                    <li><a href="#products" class="text-xs text-stone-500 hover:text-orange-400 transition-colors">concrete Poles</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-xs font-medium text-white uppercase tracking-wider mb-4">Delivery Areas</h5>
+                <ul class="space-y-2">
+                    <li><span class="text-xs text-stone-500">Bungoma County</span></li>
+                    <li><span class="text-xs text-stone-500">Nairobi CBD</span></li>
+                    <li><span class="text-xs text-stone-500">Kiambu County</span></li>
+                    <li><span class="text-xs text-stone-500">Kisumu County</span></li>
+                    <li><span class="text-xs text-stone-500">Tranzoia County</span></li>
+                    <li><span class="text-xs text-stone-500">Nakuru County</span></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-xs font-medium text-white uppercase tracking-wider mb-4">Contact</h5>
+                <ul class="space-y-3">
+                    <li class="flex items-center gap-2 text-xs text-stone-500">
+                        <span class="iconify text-stone-600" data-icon="mdi:phone" data-width="14"></span>
+                        +254 708532427
+                    </li>
+                    <li class="flex items-center gap-2 text-xs text-stone-500">
+                        <span class="iconify text-stone-600" data-icon="mdi:whatsapp" data-width="14"></span>
+                        +254 708532427
+                    </li>
+                    <li class="flex items-center gap-2 text-xs text-stone-500">
+                        <span class="iconify text-stone-600" data-icon="mdi:email-outline" data-width="14"></span>
+                        orders@kamukuywaconcrete.co.ke
+                    </li>
+                    <li class="flex items-center gap-2 text-xs text-stone-500">
+                        <span class="iconify text-stone-600" data-icon="mdi:map-marker" data-width="14"></span>
+                        Kamukuywa, along Kitale Road
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+            <span class="text-xs text-stone-600">© 2026 Kamukuywa concrete limited. All rights reserved.</span>
+            <div class="flex items-center gap-4">
+                <span class="text-xs text-stone-600">Payments powered by</span>
+                <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20">
+                    <span class="iconify text-green-500" data-icon="mdi:cellphone" data-width="14"></span>
+                    <span class="text-xs font-medium text-green-400">M-Pesa</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+
+<!-- ========== ORDER MODAL ========== -->
+<div id="orderModal" class="fixed inset-0 z-50 hidden">
+    <div class="modal-overlay absolute inset-0" onclick="closeOrderModal()"></div>
+    <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
+        <div class="w-full max-w-lg bg-[#0a0a0a] border border-white/5 rounded-2xl overflow-hidden max-h-[90vh] overflow-y-auto" style="scrollbar-width: thin;">
+            
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between px-6 py-4 border-b border-white/5 sticky top-0 bg-[#0a0a0a] z-10">
+                <div class="flex items-center gap-2">
+                    <span class="iconify text-orange-500" data-icon="mdi:cart-outline" data-width="18"></span>
+                    <span class="text-sm font-medium">Place Your Order</span>
+                </div>
+                <button onclick="closeOrderModal()" class="text-stone-500 hover:text-white transition-colors">
+                    <span class="iconify" data-icon="mdi:close" data-width="18"></span>
+                </button>
+            </div>
+
+            <!-- Step 1: Select Products -->
+            <div id="orderStep1" class="p-6">
+                <h3 class="text-sm font-medium text-white mb-1">Step 1: Select Materials</h3>
+                <p class="text-xs text-stone-500 mb-5">Choose what you need and set quantities</p>
+
+                <div id="orderItems" class="space-y-3">
+                    <!-- Populated by JS -->
+                </div>
+
+                <div id="noItemsMsg" class="text-center py-10 text-stone-600 text-xs">
+                    <span class="iconify mb-2" data-icon="mdi:cart-off" data-width="32"></span>
+                    <p>Select products from the catalog above</p>
+                </div>
+
+                <div id="orderSummary" class="hidden mt-5 p-4 rounded-xl bg-white/[0.02] border border-white/5">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs text-stone-500">Subtotal</span>
+                        <span id="subtotal" class="text-sm font-medium text-white">KES 0</span>
+                    </div>
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs text-stone-500">Delivery (estimate)</span>
+                        <span id="deliveryFee" class="text-sm font-medium text-white">KES 0</span>
+                    </div>
+                    <div class="border-t border-white/5 pt-2 mt-2 flex items-center justify-between">
+                        <span class="text-xs font-medium text-white">Total</span>
+                        <span id="totalAmount" class="text-base font-semibold text-orange-500">KES 0</span>
+                    </div>
+                </div>
+
+                <button onclick="goToStep2()" id="step1Next" class="hidden w-full mt-5 bg-white text-black text-sm font-medium py-3 rounded-xl hover:bg-stone-200 transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
+                    Continue to Delivery Details
+                </button>
+            </div>
+
+
+
+
+
+
+            <!-- Step 2: Delivery Details -->
+            <div id="orderStep2" class="p-6 hidden">
+                <button onclick="goToStep1()" class="flex items-center gap-1 text-xs text-stone-500 hover:text-white transition-colors mb-4">
+                    <span class="iconify" data-icon="mdi:arrow-left" data-width="14"></span>
+                    Back to materials
+                </button>
+                <h3 class="text-sm font-medium text-white mb-1">Step 2: Delivery Details</h3>
+                <p class="text-xs text-stone-500 mb-5">Where should we deliver?</p>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="text-xs text-stone-400 block mb-1.5">Full Name *</label>
+                        <input type="text" id="custName" placeholder="e.g. John Kamau" class="phone-input w-full px-4 py-3 rounded-xl text-sm text-white placeholder:text-stone-600">
+                    </div>
+                    <div>
+                        <label class="text-xs text-stone-400 block mb-1.5">Phone Number *</label>
+                        <div class="flex items-center phone-input rounded-xl overflow-hidden">
+                            <span class="px-3 text-xs text-stone-500 border-r border-white/10">+254</span>
+                            <input type="tel" id="custPhone" placeholder="712 345 678" maxlength="9" class="flex-1 px-3 py-3 bg-transparent text-sm text-white placeholder:text-stone-600 outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-xs text-stone-400 block mb-1.5">Delivery Location *</label>
+                        <input type="text" id="custLocation" placeholder="e.g. Syokimau, near Tuskys" class="phone-input w-full px-4 py-3 rounded-xl text-sm text-white placeholder:text-stone-600">
+                    </div>
+                    <div>
+                        <label class="text-xs text-stone-400 block mb-1.5">County *</label>
+                        <select id="custCounty" class="phone-input w-full px-4 py-3 rounded-xl text-sm text-white bg-transparent appearance-none cursor-pointer" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 24 24%22><path fill=%22%2378716c%22 d=%22M7 10l5 5 5-5z%22/></svg>'); background-repeat: no-repeat; background-position: right 12px center;">
+                            <option value="" class="bg-[#0a0a0a]">Select county</option>
+                            <option value="nairobi" class="bg-[#0a0a0a]">Nairobi</option>
+                            <option value="kiambu" class="bg-[#0a0a0a]">Kiambu</option>
+                            <option value="machakos" class="bg-[#0a0a0a]">Machakos</option>
+                            <option value="kajiado" class="bg-[#0a0a0a]">Kajiado</option>
+                            <option value="nakuru" class="bg-[#0a0a0a]">Nakuru</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-xs text-stone-400 block mb-1.5">Additional Notes</label>
+                        <textarea id="custNotes" rows="2" placeholder="Any special instructions (gate code, site contact, etc.)" class="phone-input w-full px-4 py-3 rounded-xl text-sm text-white placeholder:text-stone-600 resize-none"></textarea>
+                    </div>
+                </div>
+
+                <button onclick="goToStep3()" class="w-full mt-5 bg-white text-black text-sm font-medium py-3 rounded-xl hover:bg-stone-200 transition-colors">
+                    Proceed to M-Pesa Payment
+                </button>
+            </div>
+
+
+
+
+
+            <!-- Step 3: M-Pesa Payment -->
+            <div id="orderStep3" class="p-6 hidden">
+                <button onclick="goToStep2()" class="flex items-center gap-1 text-xs text-stone-500 hover:text-white transition-colors mb-4">
+                    <span class="iconify" data-icon="mdi:arrow-left" data-width="14"></span>
+                    Back to details
+                </button>
+                <h3 class="text-sm font-medium text-white mb-1">Step 3: M-Pesa Payment</h3>
+                <p class="text-xs text-stone-500 mb-5">You'll receive an STK Push on your phone</p>
+
+                <!-- Order confirmation -->
+                <div class="p-4 rounded-xl bg-white/[0.02] border border-white/5 mb-5">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-xs text-stone-500">Amount to Pay</span>
+                        <span id="mpesaAmount" class="text-lg font-semibold text-green-400">KES 0</span>
+                    </div>
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-xs text-stone-500">Paybill</span>
+                        <span class="text-xs text-white font-mono">174379</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-stone-500">Account</span>
+                        <span id="mpesaAccount" class="text-xs text-white font-mono">JNG-XXXXXX</span>
+                    </div>
+                </div>
+
+
+
+
+
+                <!-- M-Pesa Phone Input -->
+                <div class="mb-5">
+                    <label class="text-xs text-stone-400 block mb-1.5">M-Pesa Phone Number *</label>
+                    <div class="flex items-center phone-input rounded-xl overflow-hidden">
+                        <span class="px-3 text-xs text-stone-500 border-r border-white/10">+254</span>
+                        <input type="tel" id="mpesaPhone" placeholder="712 345 678" maxlength="9" class="flex-1 px-3 py-3 bg-transparent text-sm text-white placeholder:text-stone-600 outline-none">
+                    </div>
+                    <p class="text-xs text-stone-600 mt-1.5">This number must be registered on M-Pesa</p>
+                </div>
+
+                <button onclick="initiateMpesa()" id="payBtn" class="w-full mpesa-bg text-white text-sm font-medium py-3.5 rounded-xl hover:brightness-110 transition-all flex items-center justify-center gap-2">
+                    <span class="iconify" data-icon="mdi:cellphone" data-width="18"></span>
+                    Send M-Pesa STK Push
+                </button>
+                <p class="text-center text-xs text-stone-600 mt-3">Don't close this window until payment is complete</p>
+            </div>
+
+
+
+
+
+            <!-- Step 4: Processing -->
+            <div id="orderStep4" class="p-6 hidden text-center">
+                <div class="mb-6">
+                    <div class="w-16 h-16 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center mx-auto mb-4" style="animation: pulse-green 2s infinite;">
+                        <span class="iconify text-green-500 animate-pulse" data-icon="mdi:cellphone-check" data-width="28"></span>
+                    </div>
+                    <h3 class="text-sm font-medium text-white mb-2">Waiting for M-Pesa Confirmation</h3>
+                    <p class="text-xs text-stone-500">Check your phone and enter your M-Pesa PIN to complete payment</p>
+                </div>
+
+                <div class="p-4 rounded-xl bg-white/[0.02] border border-white/5 text-left mb-4">
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="iconify text-green-500" data-icon="mdi:check-circle" data-width="14"></span>
+                            <span class="text-xs text-stone-400">STK Push sent to your phone</span>
+                        </div>
+                        <div id="mpesaWaiting" class="flex items-center gap-2">
+                            <span class="iconify text-stone-600 animate-pulse" data-icon="mdi:circle-outline" data-width="14"></span>
+                            <span class="text-xs text-stone-500">Waiting for PIN entry...</span>
+                        </div>
+                        <div id="mpesaConfirmed" class="hidden flex items-center gap-2">
+                            <span class="iconify text-green-500" data-icon="mdi:check-circle" data-width="14"></span>
+                            <span class="text-xs text-green-400">Payment confirmed!</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="mpesaTimer" class="text-xs text-stone-600 mb-4">
+                    Waiting... <span id="countdown">60</span>s remaining
+                </div>
+                <button onclick="cancelPayment()" class="text-xs text-stone-600 hover:text-stone-400 transition-colors">Cancel Payment</button>
+            </div>
+
+            <!-- Step 5: Success -->
+            <div id="orderStep5" class="p-6 hidden text-center">
+                <div class="mb-6">
+                    <div class="w-16 h-16 rounded-full bg-green-500/10 border border-green-500/30 flex items-center justify-center mx-auto mb-4">
+                        <span class="iconify text-green-500" data-icon="mdi:check-bold" data-width="32"></span>
+                    </div>
+                    <h3 class="text-lg font-medium text-white mb-2">Order Confirmed! 🎉</h3>
+                    <p class="text-xs text-stone-400">Your order has been received and payment confirmed</p>
+                </div>
+
+                <div class="p-4 rounded-xl bg-white/[0.02] border border-green-500/10 text-left mb-5">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs text-stone-500">Order ID</span>
+                        <span id="orderId" class="text-xs text-white font-mono">JNG-XXXXXX</span>
+                    </div>
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs text-stone-500">M-Pesa Ref</span>
+                        <span id="mpesaRef" class="text-xs text-white font-mono">QJK3L7M9R2</span>
+                    </div>
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs text-stone-500">Amount Paid</span>
+                        <span id="paidAmount" class="text-xs text-green-400 font-medium">KES 0</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-stone-500">Est. Delivery</span>
+                        <span id="estDelivery" class="text-xs text-white">Tomorrow, 8AM - 12PM</span>
+                    </div>
+                </div>
+
+                <p class="text-xs text-stone-500 mb-5">We'll call you shortly to confirm delivery time. Save the order ID for reference.</p>
+
+                <button onclick="closeOrderModal()" class="w-full bg-white text-black text-sm font-medium py-3 rounded-xl hover:bg-stone-200 transition-colors">
+                    Done
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- ========== TOAST CONTAINER ========== -->
+<div id="toastContainer" class="fixed bottom-6 right-6 z-50 space-y-2"></div>
+
+
+<script src="scripts/index.js"></script>
+</body>
+</html>
