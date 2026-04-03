@@ -228,43 +228,130 @@
 
     let countdownInterval;
 
-    function initiateMpesa() {
-        const phone = document.getElementById('mpesaPhone').value.trim();
-        if (!phone || phone.length < 9) {
-            showToast('Please enter a valid M-Pesa phone number', 'error');
+
+       // --- THIS IS THE MISSING POLLING FUNCTION ---
+       
+    /*function pollMpesaStatus(checkoutId) {
+        let attempts = 0;
+        const maxAttempts = 20; // Check for 1 minute (20 * 3 seconds)
+
+        const interval = setInterval(() => {
+            attempts++;
+
+            fetch('/api/mpesa/status', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ CheckoutRequestID: checkoutId })
+            })
+            .then(res => res.json())
+            .then(data => {
+                // If ResultCode is 0, the user paid!
+                if (data.ResultCode === '0') {
+                    clearInterval(interval);
+                    console.log("Payment Confirmed!");
+                    goToStep5(); // Show Success Screen
+                    // You can add the receipt number here: data.MpesaReceiptNumber
+                }
+                // If ResultCode exists but isn't 0, check if it's a failure
+                else if (data.ResultCode) {
+                    // 1032 = Cancelled by user, 2001 = Request cancelled by system
+                    if (data.ResultCode === '1032' || data.ResultCode === '2001') {
+                        clearInterval(interval);
+                        alert("Payment was cancelled.");
+                        goToStep1(); // Go back to start
+                    }
+                }
+            })
+            .catch(err => console.error("Polling error:", err));
+
+            // Stop polling after max attempts
+            if (attempts >= maxAttempts) {
+                clearInterval(interval);
+                alert("Request timed out. Please check your phone and try again.");
+                goToStep1();
+            }
+
+        }, 3000); // Check every 3 seconds
+    }*/
+   
+    async function initiateMpesa() {
+        const phoneInput = document.getElementById('mpesaPhone').value;
+        const amountText = document.getElementById('mpesaAmount').innerText;
+        const amount = parseInt(amountText.replace('KES ', '').trim());
+        
+        const orderId = 'ORD-' + Math.floor(Math.random() * 1000000);
+        const btn = document.getElementById('payBtn');
+
+        if (!phoneInput) {
+            alert("Please enter a phone number");
             return;
         }
 
-        const payBtn = document.getElementById('payBtn');
-        payBtn.disabled = true;
-        payBtn.innerHTML = '<span class="iconify animate-spin" data-icon="mdi:loading" data-width="18"></span> Sending STK Push...';
+        btn.disabled = true;
+        btn.innerHTML = 'Processing...';
 
-        // Simulate API call delay
-        setTimeout(() => {
-            // Simulate successful STK Push
-            document.getElementById('orderStep3').classList.add('hidden');
-            document.getElementById('orderStep4').classList.remove('hidden');
-            
-            // Reset states
-            document.getElementById('mpesaWaiting').classList.remove('hidden');
-            document.getElementById('mpesaConfirmed').classList.add('hidden');
+        try {
+            const response = await fetch('/api/mpesa/stk-push', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    phone: phoneInput, 
+                    amount: amount,
+                    orderId: orderId
+                })
+            });
 
-            startCountdown();
+            const data = await response.json();
 
-            // Simulate user entering PIN after ~5 seconds
-            setTimeout(() => {
-                document.getElementById('mpesaWaiting').innerHTML = `
-                    <span class="iconify text-yellow-500 animate-pulse" data-icon="mdi:progress-clock" data-width="14"></span>
-                    <span class="text-xs text-yellow-500">Processing payment...</span>
-                `;
-            }, 5000);
+            if (data.success) {
+                console.log("STK Push Sent. ID:", data.CheckoutRequestID);
+                goToStep4(); 
+                pollMpesaStatus(data.CheckoutRequestID);
+            } else {
+                throw new Error(data.message || "Failed to initiate payment");
+            }
 
-            // Simulate successful payment after ~8 seconds
-            setTimeout(() => {
-                paymentSuccessful();
-            }, 8000);
+        } catch (error) {
+            console.error(error);
+            alert("Error: " + error.message);
+            btn.disabled = false;
+            btn.innerHTML = 'Send M-Pesa STK Push';
+        }
+    }
 
-        }, 2000);
+    function pollMpesaStatus(checkoutId) {
+        let attempts = 0;
+        const maxAttempts = 20; 
+
+        const interval = setInterval(() => {
+            attempts++;
+
+            fetch('/api/mpesa/status', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ CheckoutRequestID: checkoutId })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.ResultCode === '0') {
+                    clearInterval(interval);
+                    console.log("Payment Confirmed!");
+                    goToStep5(); 
+                } else if (data.ResultCode === '1032' || data.ResultCode === '2001') {
+                    clearInterval(interval);    
+                    alert("Payment was cancelled.");
+                    goToStep1();
+                }
+            })
+            .catch(err => console.error("Polling error:", err));
+
+            if (attempts >= maxAttempts) {
+                clearInterval(interval);
+                alert("Request timed out.");
+                goToStep1();
+            }
+
+        }, 3000); 
     }
 
     function startCountdown() {
