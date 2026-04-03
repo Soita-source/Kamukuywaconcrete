@@ -11,10 +11,10 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // ===== PASTE YOUR CREDENTIALS HERE =====
-const CONSUMER_KEY = 'process.env.CONSUMER_KEY';
-const CONSUMER_SECRET = 'process.env.CONSUMER_SECRET';
-const SHORTCODE = 'process.env.SHORTCODE';
-const PASSKEY = 'process.env.PASSKEY';
+const CONSUMER_KEY = process.env.CONSUMER_KEY;
+const CONSUMER_SECRET = process.env.CONSUMER_SECRET;
+const SHORTCODE = process.env.SHORTCODE;
+const PASSKEY = process.env.PASSKEY;
 // =======================================
 
 let CALLBACK_URL = 'process.env.CALLBACK_URL';
@@ -102,3 +102,4 @@ app.post('/api/mpesa/status', async (req, res) => {
 });
 
 app.listen(3000, () => console.log('✅ Server running at http://localhost:3000'));
+
