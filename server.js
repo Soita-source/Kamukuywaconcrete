@@ -17,7 +17,7 @@ const SHORTCODE = process.env.SHORTCODE;
 const PASSKEY = process.env.PASSKEY;
 // =======================================
 
-let CALLBACK_URL = 'process.env.CALLBACK_URL';
+let CALLBACK_URL = process.env.CALLBACK_URL;
 const BASE_URL = 'https://sandbox.safaricom.co.ke';
 
 async function getAccessToken() {
