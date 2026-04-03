@@ -1,3 +1,6 @@
+require('dotenv').config();
+
+
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
@@ -8,13 +11,13 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // ===== PASTE YOUR CREDENTIALS HERE =====
-const CONSUMER_KEY = 'gUARKAMDHKyk5pIxFDvUBfAniw6M9cLwbJyP9DQkxL7gAw6W';
-const CONSUMER_SECRET = 'gj8JMvgwuhSnnv60vGbASoKKax25J6e1HwbxJ31dQHNNj9M1ic97Ha3wp56FjcPv';
-const SHORTCODE = '174379';
-const PASSKEY = 'bfb279f9aa9bdbcf158e97dd71a467cd2';
+const CONSUMER_KEY = 'process.env.CONSUMER_KEY';
+const CONSUMER_SECRET = 'process.env.CONSUMER_SECRET';
+const SHORTCODE = 'process.env.SHORTCODE';
+const PASSKEY = 'process.env.PASSKEY';
 // =======================================
 
-let CALLBACK_URL = 'https://monasterial-tiredly-nelly.ngrok-free.dev/mpesa/callback';
+let CALLBACK_URL = 'process.env.CALLBACK_URL';
 const BASE_URL = 'https://sandbox.safaricom.co.ke';
 
 async function getAccessToken() {
