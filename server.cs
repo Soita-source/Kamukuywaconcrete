@@ -14,7 +14,7 @@ const SHORTCODE = '174379';
 const PASSKEY = 'bfb279f9aa9bdbcf158e97dd71a467cd2';
 // =======================================
 
-let CALLBACK_URL = 'http://localhost:3000/api/mpesa/callback';
+let CALLBACK_URL = 'https://monasterial-tiredly-nelly.ngrok-free.dev/mpesa/callback';
 const BASE_URL = 'https://sandbox.safaricom.co.ke';
 
 async function getAccessToken() {
