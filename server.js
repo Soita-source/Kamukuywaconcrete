@@ -15,6 +15,7 @@ const SHORTCODE = process.env.SHORTCODE;
 const PASSKEY = process.env.PASSKEY;
 const CALLBACK_URL = process.env.CALLBACK_URL;
 const BASE_URL = 'https://sandbox.safaricom.co.ke';
+const PORT = Number(process.env.PORT) || 3000;
 
 function normalizeKenyanPhone(phone = '') {
     const digits = String(phone).replace(/\D/g, '');
@@ -50,6 +51,24 @@ async function getAccessToken() {
         { headers: { Authorization: `Basic ${auth}` } }
     );
     return res.data.access_token;
+}
+
+app.get('/health', (req, res) => {
+    res.json({
+        ok: true,
+        service: 'mpesa-stk-server',
+        callbackUrl: CALLBACK_URL || null,
+        callbackPathReachable: true
+    });
+});
+
+function callbackVerificationResponse() {
+    return {
+        ok: true,
+        message: 'Callback route is reachable',
+        expectedMethod: 'POST',
+        callbackUrl: CALLBACK_URL || null
+    };
 }
 
 app.post('/api/mpesa/stk-push', async (req, res) => {
@@ -123,6 +142,18 @@ function handleMpesaCallback(req, res) {
     console.log('Payment failed:', cb?.ResultDesc);
 }
 
+app.get('/api/mpesa/callback', (req, res) => {
+    res.json(callbackVerificationResponse());
+});
+app.get('/mpesa/callback', (req, res) => {
+    res.json(callbackVerificationResponse());
+});
+app.head('/api/mpesa/callback', (req, res) => {
+    res.status(200).end();
+});
+app.head('/mpesa/callback', (req, res) => {
+    res.status(200).end();
+});
 app.post('/api/mpesa/callback', handleMpesaCallback);
 app.post('/mpesa/callback', handleMpesaCallback);
 
@@ -155,12 +186,16 @@ app.post('/api/mpesa/status', async (req, res) => {
     }
 });
 
-app.listen(3000, () => {
-    console.log('Server running at http://localhost:3000');
+app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
+    console.log(`Health check: http://localhost:${PORT}/health`);
+    console.log(`Local callback check: http://localhost:${PORT}/mpesa/callback`);
 
     if (!CALLBACK_URL) {
         console.warn('CALLBACK_URL is missing. STK push callbacks will fail.');
     } else if (/localhost|127\.0\.0\.1/i.test(CALLBACK_URL)) {
         console.warn('CALLBACK_URL points to localhost. Safaricom cannot reach your machine from the internet.');
+    } else {
+        console.log(`Configured callback URL: ${CALLBACK_URL}`);
     }
 });
