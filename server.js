@@ -267,7 +267,7 @@ app.post('/api/mpesa/status', async (req, res) => {
     }
 });
 
-app.listen(PORT, () => {
+function logStartup() {
     console.log(`Server running at http://localhost:${PORT}`);
     console.log(`Health check: http://localhost:${PORT}/health`);
     console.log(`Local callback check: http://localhost:${PORT}/mpesa/callback`);
@@ -279,4 +279,10 @@ app.listen(PORT, () => {
     } else {
         console.log(`Configured callback URL: ${CALLBACK_URL}`);
     }
-});
+}
+
+if (require.main === module) {
+    app.listen(PORT, logStartup);
+}
+
+module.exports = app;
