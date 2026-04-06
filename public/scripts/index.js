@@ -178,6 +178,19 @@
         document.getElementById('orderStep3').classList.remove('hidden');
     }
 
+    function goToStep4() {
+        document.getElementById('orderStep3').classList.add('hidden');
+        document.getElementById('orderStep4').classList.remove('hidden');
+        document.getElementById('mpesaWaiting').classList.remove('hidden');
+        document.getElementById('mpesaConfirmed').classList.add('hidden');
+        document.getElementById('mpesaTimer').innerHTML = 'Waiting... <span id="countdown">60</span>s remaining';
+        startCountdown();
+    }
+
+    function goToStep5() {
+        paymentSuccessful();
+    }
+
     // ===== M-PESA PAYMENT FLOW =====
     /*
      * ============================================================
@@ -279,7 +292,7 @@
         const amountText = document.getElementById('mpesaAmount').innerText;
         const amount = parseInt(amountText.replace('KES ', '').trim());
         
-        const orderId = 'ORD-' + Math.floor(Math.random() * 1000000);
+        const orderId = orderData.orderId || ('ORD-' + Math.floor(Math.random() * 1000000));
         const btn = document.getElementById('payBtn');
 
         if (!phoneInput) {
