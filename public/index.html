@@ -234,9 +234,70 @@
             </div>
         </div>
 
+        <div class="mb-12">
+            <h3 class="text-lg font-medium text-white mb-6 flex items-center gap-2">
+                <span class="iconify text-orange-500" data-icon="mdi:grain" data-width="20"></span>
+                Sand
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-card rounded-xl p-6 cursor-pointer product-card" data-product="river-sand-copy" data-price="3500" data-unit="tonne" onclick="toggleProduct(this)">
+                    <div class="w-full h-40 rounded-lg mb-4 overflow-hidden bg-stone-900/50">
+                        <img src="images/poles3.jpeg">
+                    </div>
+                    <div class="flex items-start justify-between mb-3">
+                        <div>
+                            <h4 class="text-sm font-medium text-white">River Sand</h4>
+                            <p class="text-xs text-stone-500 mt-1">Smooth, well-graded â€” ideal for plastering & concrete</p>
+                        </div>
+                        <div class="w-6 h-6 rounded-full border border-white/10 flex items-center justify-center product-check transition-all">
+                            <span class="iconify text-orange-500 opacity-0" data-icon="mdi:check" data-width="14"></span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-lg font-semibold text-white">KES 3,500</span>
+                        <span class="text-xs text-stone-500">per tonne</span>
+                    </div>
+                </div>
 
+                <div class="glass-card rounded-xl p-6 cursor-pointer product-card" data-product="ballast-copy" data-price="4000" data-unit="tonne" onclick="toggleProduct(this)">
+                    <div class="w-full h-40 rounded-lg mb-4 overflow-hidden bg-stone-900/50">
+                        <img src="images/poles3.jpeg">
+                    </div>
+                    <div class="flex items-start justify-between mb-3">
+                        <div>
+                            <h4 class="text-sm font-medium text-white">Ballast (Aggregates)</h4>
+                            <p class="text-xs text-stone-500 mt-1">Crushed stone â€” essential for foundation & slabs</p>
+                        </div>
+                        <div class="w-6 h-6 rounded-full border border-white/10 flex items-center justify-center product-check transition-all">
+                            <span class="iconify text-orange-500 opacity-0" data-icon="mdi:check" data-width="14"></span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-lg font-semibold text-white">KES 4,000</span>
+                        <span class="text-xs text-stone-500">per tonne</span>
+                    </div>
+                </div>
 
-
+                <div class="glass-card rounded-xl p-6 cursor-pointer product-card" data-product="building-sand-copy" data-price="2800" data-unit="tonne" onclick="toggleProduct(this)">
+                    <div class="w-full h-40 rounded-lg mb-4 overflow-hidden bg-stone-900/50">
+                        <img src="images/poles3.jpeg">
+                    </div>
+                    <div class="flex items-start justify-between mb-3">
+                        <div>
+                            <h4 class="text-sm font-medium text-white">Building Sand</h4>
+                            <p class="text-xs text-stone-500 mt-1">Coarse sand â€” perfect for mortar & block making</p>
+                        </div>
+                        <div class="w-6 h-6 rounded-full border border-white/10 flex items-center justify-center product-check transition-all">
+                            <span class="iconify text-orange-500 opacity-0" data-icon="mdi:check" data-width="14"></span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-lg font-semibold text-white">KES 2,800</span>
+                        <span class="text-xs text-stone-500">per tonne</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
        <!-- Poles Products (Video Showcase) -->
         <div>
@@ -494,7 +555,7 @@
                     <div class="w-8 h-8 rounded-full bg-stone-800 flex items-center justify-center text-xs font-medium text-stone-400">AW</div>
                     <div>
                         <div class="text-xs font-medium text-white">Ann Nafula</div>
-                        <div class="text-xs text-stone-600">Developer, Rongai</div>
+                        <div class="text-xs text-stone-600">Developer, Kitale</div>
                     </div>
                 </div>
             </div>
@@ -510,8 +571,8 @@
                 <div class="flex items-center gap-3">
                     <div class="w-8 h-8 rounded-full bg-stone-800 flex items-center justify-center text-xs font-medium text-stone-400">PO</div>
                     <div>
-                        <div class="text-xs font-medium text-white">Peter Kariuki</div>
-                        <div class="text-xs text-stone-600">Homeowner, Nairobi</div>
+                        <div class="text-xs font-medium text-white">Nelson Muyeyia</div>
+                        <div class="text-xs text-stone-600">Homeowner, Kakamega</div>
                     </div>
                 </div>
             </div>
@@ -650,11 +711,9 @@
                 <h5 class="text-xs font-medium text-white uppercase tracking-wider mb-4">Delivery Areas</h5>
                 <ul class="space-y-2">
                     <li><span class="text-xs text-stone-500">Bungoma County</span></li>
-                    <li><span class="text-xs text-stone-500">Nairobi CBD</span></li>
-                    <li><span class="text-xs text-stone-500">Kiambu County</span></li>
                     <li><span class="text-xs text-stone-500">Kisumu County</span></li>
                     <li><span class="text-xs text-stone-500">Tranzoia County</span></li>
-                    <li><span class="text-xs text-stone-500">Nakuru County</span></li>
+                    <li><span class="text-xs text-stone-500">Kakamega County</span></li>
                 </ul>
             </div>
             <div>
@@ -728,14 +787,6 @@
                 </div>
 
                 <div id="orderSummary" class="hidden mt-5 p-4 rounded-xl bg-white/[0.02] border border-white/5">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-xs text-stone-500">Subtotal</span>
-                        <span id="subtotal" class="text-sm font-medium text-white">KES 0</span>
-                    </div>
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-xs text-stone-500">Delivery (estimate)</span>
-                        <span id="deliveryFee" class="text-sm font-medium text-white">KES 0</span>
-                    </div>
                     <div class="border-t border-white/5 pt-2 mt-2 flex items-center justify-between">
                         <span class="text-xs font-medium text-white">Total</span>
                         <span id="totalAmount" class="text-base font-semibold text-orange-500">KES 0</span>
@@ -764,27 +815,29 @@
                 <div class="space-y-4">
                     <div>
                         <label class="text-xs text-stone-400 block mb-1.5">Full Name *</label>
-                        <input type="text" id="custName" placeholder="e.g. John Kamau" class="phone-input w-full px-4 py-3 rounded-xl text-sm text-white placeholder:text-stone-600">
+                        <input type="text" id="custName" placeholder="e.g. John Shikwekwe" class="phone-input w-full px-4 py-3 rounded-xl text-sm text-white placeholder:text-stone-600">
                     </div>
                     <div>
                         <label class="text-xs text-stone-400 block mb-1.5">Phone Number *</label>
                         <div class="flex items-center phone-input rounded-xl overflow-hidden">
                             <span class="px-3 text-xs text-stone-500 border-r border-white/10">+254</span>
-                            <input type="tel" id="custPhone" placeholder="712 345 678" maxlength="9" class="flex-1 px-3 py-3 bg-transparent text-sm text-white placeholder:text-stone-600 outline-none">
+                            <input type="tel" id="custPhone" placeholder="712345678 or 0114586459" maxlength="10" class="flex-1 px-3 py-3 bg-transparent text-sm text-white placeholder:text-stone-600 outline-none">
                         </div>
                     </div>
                     <div>
                         <label class="text-xs text-stone-400 block mb-1.5">Delivery Location *</label>
-                        <input type="text" id="custLocation" placeholder="e.g. Syokimau, near Tuskys" class="phone-input w-full px-4 py-3 rounded-xl text-sm text-white placeholder:text-stone-600">
+                        <input type="text" id="custLocation" placeholder="e.g. Mbale, near Kisumu" class="phone-input w-full px-4 py-3 rounded-xl text-sm text-white placeholder:text-stone-600">
                     </div>
                     <div>
                         <label class="text-xs text-stone-400 block mb-1.5">County *</label>
                         <select id="custCounty" class="phone-input w-full px-4 py-3 rounded-xl text-sm text-white bg-transparent appearance-none cursor-pointer" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 24 24%22><path fill=%22%2378716c%22 d=%22M7 10l5 5 5-5z%22/></svg>'); background-repeat: no-repeat; background-position: right 12px center;">
                             <option value="" class="bg-[#0a0a0a]">Select county</option>
-                            <option value="nairobi" class="bg-[#0a0a0a]">Nairobi</option>
-                            <option value="kiambu" class="bg-[#0a0a0a]">Kiambu</option>
-                            <option value="machakos" class="bg-[#0a0a0a]">Machakos</option>
-                            <option value="kajiado" class="bg-[#0a0a0a]">Kajiado</option>
+                            <option value="nairobi" class="bg-[#0a0a0a]">Bungoma</option>
+                            <option value="kiambu" class="bg-[#0a0a0a]">Tranzoia</option>
+                            <option value="machakos" class="bg-[#0a0a0a]">Busia</option>
+                            <option value="kajiado" class="bg-[#0a0a0a]">Kakamega</option>
+                            <option value="nakuru" class="bg-[#0a0a0a]">Vihiga</option>
+                            <option value="nakuru" class="bg-[#0a0a0a]">Kisumu</option>
                             <option value="nakuru" class="bg-[#0a0a0a]">Nakuru</option>
                         </select>
                     </div>
@@ -837,7 +890,7 @@
                     <label class="text-xs text-stone-400 block mb-1.5">M-Pesa Phone Number *</label>
                     <div class="flex items-center phone-input rounded-xl overflow-hidden">
                         <span class="px-3 text-xs text-stone-500 border-r border-white/10">+254</span>
-                        <input type="tel" id="mpesaPhone" placeholder="712 345 678" maxlength="9" class="flex-1 px-3 py-3 bg-transparent text-sm text-white placeholder:text-stone-600 outline-none">
+                        <input type="tel" id="mpesaPhone" placeholder="712345678 or 0114586459" maxlength="10" class="flex-1 px-3 py-3 bg-transparent text-sm text-white placeholder:text-stone-600 outline-none">
                     </div>
                     <p class="text-xs text-stone-600 mt-1.5">This number must be registered on M-Pesa</p>
                 </div>

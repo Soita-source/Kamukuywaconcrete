@@ -91,22 +91,40 @@
     }
 
     function updateTotals() {
-        let subtotal = 0;
-        Object.values(selectedProducts).forEach(p => subtotal += p.price * p.qty);
-        
-        const deliveryFee = subtotal > 0 ? (subtotal > 20000 ? 2000 : 3500) : 0;
-        const total = subtotal + deliveryFee;
-
-        document.getElementById('subtotal').textContent = `KES ${subtotal.toLocaleString()}`;
-        document.getElementById('deliveryFee').textContent = `KES ${deliveryFee.toLocaleString()}`;
-        document.getElementById('totalAmount').textContent = `KES ${total.toLocaleString()}`;
+        document.getElementById('totalAmount').textContent = `KES ${getTotal().toLocaleString()}`;
     }
 
     function getTotal() {
-        let subtotal = 0;
-        Object.values(selectedProducts).forEach(p => subtotal += p.price * p.qty);
-        const deliveryFee = subtotal > 20000 ? 2000 : 3500;
-        return subtotal + deliveryFee;
+        let total = 0;
+        Object.values(selectedProducts).forEach(p => total += p.price * p.qty);
+        return total;
+    }
+
+    function normalizeKenyanPhoneInput(phone = '') {
+        const digits = String(phone).replace(/\D/g, '');
+
+        if (digits.startsWith('254') && digits.length === 12) {
+            return {
+                local: digits.slice(3),
+                international: `+${digits}`
+            };
+        }
+
+        if (digits.startsWith('0') && digits.length === 10) {
+            return {
+                local: digits,
+                international: `+254${digits.slice(1)}`
+            };
+        }
+
+        if ((digits.startsWith('7') || digits.startsWith('1')) && digits.length === 9) {
+            return {
+                local: digits,
+                international: `+254${digits}`
+            };
+        }
+
+        return null;
     }
 
     // ===== ORDER MODAL NAVIGATION =====
@@ -149,15 +167,16 @@
         const phone = document.getElementById('custPhone').value.trim();
         const location = document.getElementById('custLocation').value.trim();
         const county = document.getElementById('custCounty').value;
+        const normalizedPhone = normalizeKenyanPhoneInput(phone);
 
         if (!name) { showToast('Please enter your full name', 'error'); return; }
-        if (!phone || phone.length < 9) { showToast('Please enter a valid phone number', 'error'); return; }
+        if (!normalizedPhone) { showToast('Please enter a valid phone number', 'error'); return; }
         if (!location) { showToast('Please enter delivery location', 'error'); return; }
         if (!county) { showToast('Please select a county', 'error'); return; }
 
         orderData = {
             name,
-            phone: '+254' + phone,
+            phone: normalizedPhone.international,
             location,
             county,
             notes: document.getElementById('custNotes').value.trim(),
@@ -172,7 +191,7 @@
         document.getElementById('mpesaAccount').textContent = orderId;
         
         // Pre-fill M-Pesa phone
-        document.getElementById('mpesaPhone').value = phone;
+        document.getElementById('mpesaPhone').value = normalizedPhone.local;
 
         document.getElementById('orderStep2').classList.add('hidden');
         document.getElementById('orderStep3').classList.remove('hidden');
@@ -195,7 +214,12 @@
         const rawMessage = typeof result === 'string'
             ? result
             : (result?.ResultDesc || result?.error || result?.message || 'Payment did not complete.');
+        const resultCode = String(result?.ResultCode || '');
         const normalized = rawMessage.toLowerCase();
+
+        if (resultCode === '1037') {
+            return 'Payment failed: your phone could not be reached in time. Please confirm network signal and try again.';
+        }
 
         if (normalized.includes('insufficient')) {
             return 'Payment failed: this M-Pesa number has insufficient funds.';
@@ -343,12 +367,13 @@
         const phoneInput = document.getElementById('mpesaPhone').value;
         const amountText = document.getElementById('mpesaAmount').innerText;
         const amount = parseInt(amountText.replace(/[^0-9]/g, ''), 10);
+        const normalizedPhone = normalizeKenyanPhoneInput(phoneInput);
         
         const orderId = orderData.orderId || ('ORD-' + Math.floor(Math.random() * 1000000));
         const btn = document.getElementById('payBtn');
 
-        if (!phoneInput) {
-            alert("Please enter a phone number");
+        if (!normalizedPhone) {
+            alert("Please enter a valid M-Pesa phone number");
             return;
         }
 
@@ -360,7 +385,7 @@
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    phone: phoneInput, 
+                    phone: normalizedPhone.local, 
                     amount: amount,
                     orderId: orderId
                 })
