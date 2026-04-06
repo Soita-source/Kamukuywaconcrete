@@ -191,6 +191,45 @@
         paymentSuccessful();
     };
 
+    function getFriendlyMpesaMessage(result) {
+        const rawMessage = typeof result === 'string'
+            ? result
+            : (result?.ResultDesc || result?.error || result?.message || 'Payment did not complete.');
+        const normalized = rawMessage.toLowerCase();
+
+        if (normalized.includes('insufficient')) {
+            return 'Payment failed: this M-Pesa number has insufficient funds.';
+        }
+
+        if (normalized.includes('cancel') || normalized.includes('declined')) {
+            return 'Payment was cancelled on the phone before completion.';
+        }
+
+        if (normalized.includes('timeout')) {
+            return 'Payment timed out before it was confirmed on the phone.';
+        }
+
+        if (normalized.includes('wrong credentials')) {
+            return 'Payment setup error: the server M-Pesa credentials are invalid.';
+        }
+
+        return `Payment failed: ${rawMessage}`;
+    }
+
+    function handleMpesaFailure(result) {
+        const friendlyMessage = getFriendlyMpesaMessage(result);
+
+        clearInterval(countdownInterval);
+        document.getElementById('mpesaWaiting').classList.add('hidden');
+        document.getElementById('mpesaConfirmed').classList.add('hidden');
+        document.getElementById('mpesaTimer').innerHTML = `<span class="text-red-400">${friendlyMessage}</span>`;
+        showToast(friendlyMessage, 'error');
+
+        setTimeout(() => {
+            cancelPayment();
+        }, 2200);
+    }
+
     // ===== M-PESA PAYMENT FLOW =====
     /*
      * ============================================================
@@ -240,6 +279,19 @@
      */
 
     let countdownInterval;
+    let mpesaPollTimeout = null;
+    let mpesaPollingActive = false;
+    const MPESA_POLL_MAX_ATTEMPTS = 12;
+    const MPESA_POLL_DEFAULT_DELAY_MS = 6000;
+    const MPESA_WAIT_TIMEOUT_SECONDS = 90;
+
+    function stopMpesaPolling() {
+        mpesaPollingActive = false;
+        if (mpesaPollTimeout) {
+            clearTimeout(mpesaPollTimeout);
+            mpesaPollTimeout = null;
+        }
+    }
 
 
        // --- THIS IS THE MISSING POLLING FUNCTION ---
@@ -290,7 +342,7 @@
     async function initiateMpesa() {
         const phoneInput = document.getElementById('mpesaPhone').value;
         const amountText = document.getElementById('mpesaAmount').innerText;
-        const amount = parseInt(amountText.replace('KES ', '').trim());
+        const amount = parseInt(amountText.replace(/[^0-9]/g, ''), 10);
         
         const orderId = orderData.orderId || ('ORD-' + Math.floor(Math.random() * 1000000));
         const btn = document.getElementById('payBtn');
@@ -333,10 +385,12 @@
     }
 
     function pollMpesaStatus(checkoutId) {
+        stopMpesaPolling();
+        mpesaPollingActive = true;
         let attempts = 0;
-        const maxAttempts = 20; 
 
-        const interval = setInterval(() => {
+        const runPoll = () => {
+            if (!mpesaPollingActive) return;
             attempts++;
 
             fetch('/api/mpesa/status', {
@@ -346,40 +400,50 @@
             })
             .then(res => res.json())
             .then(data => {
+                if (!mpesaPollingActive) return;
+
                 if (data.ResultCode === '0') {
-                    clearInterval(interval);
+                    stopMpesaPolling();
                     console.log("Payment Confirmed!");
                     window.goToStep5();
+                } else if (data.pending || data.ResultCode === '4999') {
+                    console.log("M-Pesa status still pending:", data.error || data);
+                    if (attempts >= MPESA_POLL_MAX_ATTEMPTS) {
+                        stopMpesaPolling();
+                        handleMpesaFailure('Request timed out. Safaricom accepted the request, but no final confirmation was received.');
+                        return;
+                    }
+                    const nextDelay = Number(data.retryAfterMs) || MPESA_POLL_DEFAULT_DELAY_MS;
+                    mpesaPollTimeout = setTimeout(runPoll, nextDelay);
                 } else if (data.ResultCode === '1032' || data.ResultCode === '2001') {
-                    clearInterval(interval);    
-                    alert(data.ResultDesc || "Payment was cancelled.");
-                    cancelPayment();
+                    stopMpesaPolling();
+                    handleMpesaFailure(data);
                 } else if (data.ResultCode && data.ResultCode !== '1') {
-                    clearInterval(interval);
+                    stopMpesaPolling();
                     console.error("M-Pesa status failure:", data);
-                    alert(data.ResultDesc || "Payment did not complete.");
-                    cancelPayment();
+                    handleMpesaFailure(data);
                 } else {
                     console.log("M-Pesa status pending:", data);
+                    if (attempts >= MPESA_POLL_MAX_ATTEMPTS) {
+                        stopMpesaPolling();
+                        handleMpesaFailure('Request timed out. Safaricom accepted the request, but no final confirmation was received.');
+                        return;
+                    }
+                    mpesaPollTimeout = setTimeout(runPoll, MPESA_POLL_DEFAULT_DELAY_MS);
                 }
             })
             .catch(err => {
-                clearInterval(interval);
+                stopMpesaPolling();
                 console.error("Polling error:", err);
-                alert("Could not verify payment status. Please try again.");
-                cancelPayment();
+                handleMpesaFailure('Could not verify payment status. Please try again.');
             });
+        };
 
-            if (attempts >= maxAttempts) {
-                clearInterval(interval);
-                alert("Request timed out. Safaricom accepted the request, but no final confirmation was received.");
-                cancelPayment();
-            }
-        }, 3000); 
+        runPoll();
     }
 
     function startCountdown() {
-        let seconds = 60;
+        let seconds = MPESA_WAIT_TIMEOUT_SECONDS;
         document.getElementById('countdown').textContent = seconds;
         clearInterval(countdownInterval);
         countdownInterval = setInterval(() => {
@@ -387,6 +451,7 @@
             document.getElementById('countdown').textContent = seconds;
             if (seconds <= 0) {
                 clearInterval(countdownInterval);
+                stopMpesaPolling();
                 cancelPayment();
                 showToast('Payment timed out. Please try again.', 'error');
             }
@@ -394,6 +459,7 @@
     }
 
     function paymentSuccessful() {
+        stopMpesaPolling();
         clearInterval(countdownInterval);
         
         document.getElementById('mpesaWaiting').classList.add('hidden');
@@ -421,6 +487,7 @@
     }
 
     function cancelPayment() {
+        stopMpesaPolling();
         clearInterval(countdownInterval);
         document.getElementById('orderStep4').classList.add('hidden');
         document.getElementById('orderStep3').classList.remove('hidden');

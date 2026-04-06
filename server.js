@@ -16,6 +16,8 @@ const PASSKEY = process.env.PASSKEY;
 const CALLBACK_URL = process.env.CALLBACK_URL;
 const BASE_URL = 'https://sandbox.safaricom.co.ke';
 const PORT = Number(process.env.PORT) || 3000;
+const mpesaTransactions = new Map();
+let latestMpesaCallback = null;
 
 function normalizeKenyanPhone(phone = '') {
     const digits = String(phone).replace(/\D/g, '');
@@ -44,6 +46,25 @@ function getAxiosErrorMessage(err) {
     );
 }
 
+function getRetryDelayMs(statusCode) {
+    if (statusCode === 429) return 10000;
+    if (statusCode === 403) return 12000;
+    return 6000;
+}
+
+function extractCallbackMetadata(items = []) {
+    const data = {};
+    items.forEach((item) => {
+        data[item.Name] = item.Value;
+    });
+    return data;
+}
+
+function getCachedTransactionStatus(checkoutRequestId) {
+    if (!checkoutRequestId) return null;
+    return mpesaTransactions.get(checkoutRequestId) || null;
+}
+
 async function getAccessToken() {
     const auth = Buffer.from(`${CONSUMER_KEY}:${CONSUMER_SECRET}`).toString('base64');
     const res = await axios.get(
@@ -60,6 +81,10 @@ app.get('/health', (req, res) => {
         callbackUrl: CALLBACK_URL || null,
         callbackPathReachable: true
     });
+});
+
+app.get('/favicon.ico', (req, res) => {
+    res.sendFile('logo.jpeg', { root: 'public/images' });
 });
 
 function callbackVerificationResponse() {
@@ -105,6 +130,15 @@ app.post('/api/mpesa/stk-push', async (req, res) => {
         console.log('STK Response:', JSON.stringify(stkRes.data, null, 2));
 
         if (stkRes.data.ResponseCode === '0') {
+            mpesaTransactions.set(stkRes.data.CheckoutRequestID, {
+                source: 'initiation',
+                pending: true,
+                MerchantRequestID: stkRes.data.MerchantRequestID,
+                CheckoutRequestID: stkRes.data.CheckoutRequestID,
+                ResultCode: '4999',
+                ResultDesc: 'STK push accepted and waiting for customer action.'
+            });
+
             return res.json({
                 success: true,
                 CheckoutRequestID: stkRes.data.CheckoutRequestID,
@@ -128,17 +162,28 @@ function handleMpesaCallback(req, res) {
 
     console.log('\nM-Pesa callback:', JSON.stringify(req.body, null, 2));
     const cb = req.body.Body?.stkCallback;
+    const callbackData = {
+        source: 'callback',
+        pending: false,
+        MerchantRequestID: cb?.MerchantRequestID,
+        CheckoutRequestID: cb?.CheckoutRequestID,
+        ResultCode: String(cb?.ResultCode ?? ''),
+        ResultDesc: cb?.ResultDesc || 'No callback description received'
+    };
+    latestMpesaCallback = {
+        receivedAt: new Date().toISOString(),
+        ...callbackData
+    };
 
     if (cb?.ResultCode === 0) {
-        const items = cb.CallbackMetadata?.Item || [];
-        const data = {};
-        items.forEach((item) => {
-            data[item.Name] = item.Value;
-        });
+        const data = extractCallbackMetadata(cb.CallbackMetadata?.Item || []);
+        callbackData.CallbackMetadata = data;
+        mpesaTransactions.set(cb.CheckoutRequestID, callbackData);
         console.log('Payment success - Receipt:', data.MpesaReceiptNo, 'Amount:', data.Amount);
         return;
     }
 
+    mpesaTransactions.set(cb?.CheckoutRequestID, callbackData);
     console.log('Payment failed:', cb?.ResultDesc);
 }
 
@@ -156,10 +201,29 @@ app.head('/mpesa/callback', (req, res) => {
 });
 app.post('/api/mpesa/callback', handleMpesaCallback);
 app.post('/mpesa/callback', handleMpesaCallback);
+app.get('/api/mpesa/callback/latest', (req, res) => {
+    res.json({
+        ok: true,
+        latestCallback: latestMpesaCallback
+    });
+});
+app.get('/api/mpesa/transaction/:checkoutRequestId', (req, res) => {
+    const transaction = getCachedTransactionStatus(req.params.checkoutRequestId);
+    res.json({
+        ok: true,
+        transaction: transaction || null
+    });
+});
 
 app.post('/api/mpesa/status', async (req, res) => {
     try {
         const { CheckoutRequestID } = req.body;
+        const cachedStatus = getCachedTransactionStatus(CheckoutRequestID);
+
+        if (cachedStatus && cachedStatus.pending === false) {
+            return res.json(cachedStatus);
+        }
+
         const token = await getAccessToken();
         const timestamp = getTimestamp();
         const password = getPassword(timestamp);
@@ -180,9 +244,26 @@ app.post('/api/mpesa/status', async (req, res) => {
             }
         );
 
+        if (queryRes.data.ResultCode === '0' || (queryRes.data.ResultCode && queryRes.data.ResultCode !== '4999')) {
+            mpesaTransactions.set(CheckoutRequestID, {
+                ...queryRes.data,
+                source: 'status-query',
+                pending: false
+            });
+        }
+
         return res.json(queryRes.data);
     } catch (err) {
-        return res.status(500).json({ error: getAxiosErrorMessage(err) });
+        const statusCode = err.response?.status;
+        const errorMessage = getAxiosErrorMessage(err);
+        console.error('Status Error:', err.response?.data || err.message);
+        return res.json({
+            success: false,
+            pending: true,
+            error: errorMessage,
+            statusCode,
+            retryAfterMs: getRetryDelayMs(statusCode)
+        });
     }
 });
 
