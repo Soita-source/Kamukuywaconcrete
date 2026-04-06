@@ -18,13 +18,14 @@ const BASE_URL = 'https://sandbox.safaricom.co.ke';
 const PORT = Number(process.env.PORT) || 3000;
 const mpesaTransactions = new Map();
 let latestMpesaCallback = null;
+const MPESA_STATUS_POLL_WINDOW_MS = 15000;
 
 function normalizeKenyanPhone(phone = '') {
     const digits = String(phone).replace(/\D/g, '');
 
     if (digits.startsWith('254') && digits.length === 12) return digits;
     if (digits.startsWith('0') && digits.length === 10) return '254' + digits.slice(1);
-    if (digits.startsWith('7') && digits.length === 9) return '254' + digits;
+    if ((digits.startsWith('7') || digits.startsWith('1')) && digits.length === 9) return '254' + digits;
 
     throw new Error('Use a valid Safaricom number in the format 07XXXXXXXX or 7XXXXXXXX.');
 }
@@ -63,6 +64,18 @@ function extractCallbackMetadata(items = []) {
 function getCachedTransactionStatus(checkoutRequestId) {
     if (!checkoutRequestId) return null;
     return mpesaTransactions.get(checkoutRequestId) || null;
+}
+
+function buildPendingTransaction(checkoutRequestId, overrides = {}) {
+    return {
+        source: 'status-cache',
+        pending: true,
+        CheckoutRequestID: checkoutRequestId,
+        ResultCode: '4999',
+        ResultDesc: 'STK push accepted and waiting for customer action.',
+        nextAllowedStatusCheckAt: 0,
+        ...overrides
+    };
 }
 
 async function getAccessToken() {
@@ -131,12 +144,10 @@ app.post('/api/mpesa/stk-push', async (req, res) => {
 
         if (stkRes.data.ResponseCode === '0') {
             mpesaTransactions.set(stkRes.data.CheckoutRequestID, {
-                source: 'initiation',
-                pending: true,
                 MerchantRequestID: stkRes.data.MerchantRequestID,
-                CheckoutRequestID: stkRes.data.CheckoutRequestID,
-                ResultCode: '4999',
-                ResultDesc: 'STK push accepted and waiting for customer action.'
+                ...buildPendingTransaction(stkRes.data.CheckoutRequestID, {
+                    source: 'initiation'
+                })
             });
 
             return res.json({
@@ -224,6 +235,19 @@ app.post('/api/mpesa/status', async (req, res) => {
             return res.json(cachedStatus);
         }
 
+        const now = Date.now();
+        if (
+            cachedStatus &&
+            cachedStatus.pending === true &&
+            cachedStatus.nextAllowedStatusCheckAt &&
+            now < cachedStatus.nextAllowedStatusCheckAt
+        ) {
+            return res.json({
+                ...cachedStatus,
+                retryAfterMs: cachedStatus.nextAllowedStatusCheckAt - now
+            });
+        }
+
         const token = await getAccessToken();
         const timestamp = getTimestamp();
         const password = getPassword(timestamp);
@@ -250,19 +274,37 @@ app.post('/api/mpesa/status', async (req, res) => {
                 source: 'status-query',
                 pending: false
             });
+        } else {
+            mpesaTransactions.set(CheckoutRequestID, buildPendingTransaction(CheckoutRequestID, {
+                source: 'status-query',
+                MerchantRequestID: queryRes.data.MerchantRequestID || cachedStatus?.MerchantRequestID,
+                ResultDesc: queryRes.data.ResultDesc || queryRes.data.ResponseDescription || 'Waiting for customer action.',
+                nextAllowedStatusCheckAt: now + MPESA_STATUS_POLL_WINDOW_MS
+            }));
         }
 
         return res.json(queryRes.data);
     } catch (err) {
         const statusCode = err.response?.status;
         const errorMessage = getAxiosErrorMessage(err);
+        const { CheckoutRequestID } = req.body;
+        const retryAfterMs = getRetryDelayMs(statusCode);
         console.error('Status Error:', err.response?.data || err.message);
+        if (CheckoutRequestID) {
+            const previousStatus = getCachedTransactionStatus(CheckoutRequestID);
+            mpesaTransactions.set(CheckoutRequestID, buildPendingTransaction(CheckoutRequestID, {
+                source: previousStatus?.source || 'status-error',
+                MerchantRequestID: previousStatus?.MerchantRequestID,
+                ResultDesc: previousStatus?.ResultDesc || 'Waiting for M-Pesa confirmation.',
+                nextAllowedStatusCheckAt: Date.now() + retryAfterMs
+            }));
+        }
         return res.json({
             success: false,
             pending: true,
             error: errorMessage,
             statusCode,
-            retryAfterMs: getRetryDelayMs(statusCode)
+            retryAfterMs
         });
     }
 });

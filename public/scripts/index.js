@@ -443,7 +443,7 @@
                 } else if (data.ResultCode === '1032' || data.ResultCode === '2001') {
                     stopMpesaPolling();
                     handleMpesaFailure(data);
-                } else if (data.ResultCode && data.ResultCode !== '1') {
+                } else if (data.ResultCode) {
                     stopMpesaPolling();
                     console.error("M-Pesa status failure:", data);
                     handleMpesaFailure(data);
