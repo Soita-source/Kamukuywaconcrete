@@ -178,18 +178,18 @@
         document.getElementById('orderStep3').classList.remove('hidden');
     }
 
-    function goToStep4() {
+    window.goToStep4 = function goToStep4() {
         document.getElementById('orderStep3').classList.add('hidden');
         document.getElementById('orderStep4').classList.remove('hidden');
         document.getElementById('mpesaWaiting').classList.remove('hidden');
         document.getElementById('mpesaConfirmed').classList.add('hidden');
         document.getElementById('mpesaTimer').innerHTML = 'Waiting... <span id="countdown">60</span>s remaining';
         startCountdown();
-    }
+    };
 
-    function goToStep5() {
+    window.goToStep5 = function goToStep5() {
         paymentSuccessful();
-    }
+    };
 
     // ===== M-PESA PAYMENT FLOW =====
     /*
@@ -318,7 +318,7 @@
 
             if (data.success) {
                 console.log("STK Push Sent. ID:", data.CheckoutRequestID);
-                goToStep4(); 
+                window.goToStep4();
                 pollMpesaStatus(data.CheckoutRequestID);
             } else {
                 throw new Error(data.message || "Failed to initiate payment");
@@ -349,21 +349,32 @@
                 if (data.ResultCode === '0') {
                     clearInterval(interval);
                     console.log("Payment Confirmed!");
-                    goToStep5(); 
+                    window.goToStep5();
                 } else if (data.ResultCode === '1032' || data.ResultCode === '2001') {
                     clearInterval(interval);    
-                    alert("Payment was cancelled.");
-                    goToStep1();
+                    alert(data.ResultDesc || "Payment was cancelled.");
+                    cancelPayment();
+                } else if (data.ResultCode && data.ResultCode !== '1') {
+                    clearInterval(interval);
+                    console.error("M-Pesa status failure:", data);
+                    alert(data.ResultDesc || "Payment did not complete.");
+                    cancelPayment();
+                } else {
+                    console.log("M-Pesa status pending:", data);
                 }
             })
-            .catch(err => console.error("Polling error:", err));
+            .catch(err => {
+                clearInterval(interval);
+                console.error("Polling error:", err);
+                alert("Could not verify payment status. Please try again.");
+                cancelPayment();
+            });
 
             if (attempts >= maxAttempts) {
                 clearInterval(interval);
-                alert("Request timed out.");
-                goToStep1();
+                alert("Request timed out. Safaricom accepted the request, but no final confirmation was received.");
+                cancelPayment();
             }
-
         }, 3000); 
     }
 
