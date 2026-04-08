@@ -200,15 +200,86 @@
     window.goToStep4 = function goToStep4() {
         document.getElementById('orderStep3').classList.add('hidden');
         document.getElementById('orderStep4').classList.remove('hidden');
-        document.getElementById('mpesaWaiting').classList.remove('hidden');
-        document.getElementById('mpesaConfirmed').classList.add('hidden');
-        document.getElementById('mpesaTimer').innerHTML = 'Waiting... <span id="countdown">60</span>s remaining';
+        resetMpesaStepFeedback();
         startCountdown();
     };
 
     window.goToStep5 = function goToStep5() {
         paymentSuccessful();
     };
+
+    function setMpesaStatusNote(message, tone = 'neutral') {
+        const note = document.getElementById('mpesaStatusNote');
+        const toneClasses = {
+            neutral: 'text-stone-600',
+            pending: 'text-stone-500',
+            success: 'text-green-400',
+            error: 'text-red-400'
+        };
+
+        note.textContent = message;
+        note.className = `text-xs mb-4 ${toneClasses[tone] || toneClasses.neutral}`;
+    }
+
+    function setMpesaWaitingState(message, state = 'pending') {
+        const waitingRow = document.getElementById('mpesaWaiting');
+        const waitingIcon = document.getElementById('mpesaWaitingIcon');
+        const waitingText = document.getElementById('mpesaWaitingText');
+        const iconByState = {
+            pending: 'mdi:circle-outline',
+            processing: 'mdi:progress-clock',
+            success: 'mdi:check-circle',
+            error: 'mdi:alert-circle-outline'
+        };
+        const iconClassByState = {
+            pending: 'iconify text-stone-600 animate-pulse',
+            processing: 'iconify text-orange-400 animate-pulse',
+            success: 'iconify text-green-500',
+            error: 'iconify text-red-400'
+        };
+        const textClassByState = {
+            pending: 'text-xs text-stone-500',
+            processing: 'text-xs text-orange-300',
+            success: 'text-xs text-green-400',
+            error: 'text-xs text-red-400'
+        };
+
+        waitingRow.classList.remove('hidden');
+        waitingIcon.setAttribute('data-icon', iconByState[state] || iconByState.pending);
+        waitingIcon.className = iconClassByState[state] || iconClassByState.pending;
+        waitingText.textContent = message;
+        waitingText.className = textClassByState[state] || textClassByState.pending;
+
+        if (window.Iconify && typeof window.Iconify.scan === 'function') {
+            window.Iconify.scan(waitingRow);
+        }
+    }
+
+    function resetMpesaStepFeedback() {
+        document.getElementById('mpesaWaiting').classList.remove('hidden');
+        document.getElementById('mpesaConfirmed').classList.add('hidden');
+        setMpesaWaitingState('Waiting for PIN entry on your phone...', 'pending');
+        setMpesaStatusNote('We will update this screen automatically as soon as M-Pesa responds.', 'neutral');
+        document.getElementById('mpesaTimer').innerHTML = `Waiting... <span id="countdown">${MPESA_WAIT_TIMEOUT_SECONDS}</span>s remaining`;
+    }
+
+    function getPendingMpesaMessage(result) {
+        const rawMessage = String(result?.ResultDesc || result?.error || '').toLowerCase();
+
+        if (rawMessage.includes('processing')) {
+            return 'M-Pesa is still processing your payment request.';
+        }
+
+        if (rawMessage.includes('waiting for customer')) {
+            return 'Approve the STK prompt on your phone to continue.';
+        }
+
+        if (rawMessage.includes('accepted successfully')) {
+            return 'Safaricom accepted the request and is preparing the phone prompt.';
+        }
+
+        return 'We are still waiting for a final response from M-Pesa.';
+    }
 
     function getFriendlyMpesaMessage(result) {
         const rawMessage = typeof result === 'string'
@@ -221,7 +292,7 @@
             return 'Payment failed: your phone could not be reached in time. Please confirm network signal and try again.';
         }
 
-        if (normalized.includes('insufficient')) {
+        if (resultCode === '1' || normalized.includes('insufficient')) {
             return 'Payment failed: this M-Pesa number has insufficient funds.';
         }
 
@@ -243,9 +314,11 @@
     function handleMpesaFailure(result) {
         const friendlyMessage = getFriendlyMpesaMessage(result);
 
+        stopMpesaPolling();
         clearInterval(countdownInterval);
-        document.getElementById('mpesaWaiting').classList.add('hidden');
         document.getElementById('mpesaConfirmed').classList.add('hidden');
+        setMpesaWaitingState(friendlyMessage, 'error');
+        setMpesaStatusNote('Returning you to the payment step so you can try again.', 'error');
         document.getElementById('mpesaTimer').innerHTML = `<span class="text-red-400">${friendlyMessage}</span>`;
         showToast(friendlyMessage, 'error');
 
@@ -403,7 +476,7 @@
 
         } catch (error) {
             console.error(error);
-            alert("Error: " + error.message);
+            showToast(error.message, 'error');
             btn.disabled = false;
             btn.innerHTML = 'Send M-Pesa STK Push';
         }
@@ -430,9 +503,13 @@
                 if (data.ResultCode === '0') {
                     stopMpesaPolling();
                     console.log("Payment Confirmed!");
+                    setMpesaWaitingState('Payment confirmed by M-Pesa.', 'success');
+                    setMpesaStatusNote('Payment received. Finalizing your order now.', 'success');
                     window.goToStep5();
                 } else if (data.pending || data.ResultCode === '4999') {
                     console.log("M-Pesa status still pending:", data.error || data);
+                    setMpesaWaitingState('STK request sent. Complete the prompt on your phone.', 'processing');
+                    setMpesaStatusNote(getPendingMpesaMessage(data), 'pending');
                     if (attempts >= MPESA_POLL_MAX_ATTEMPTS) {
                         stopMpesaPolling();
                         handleMpesaFailure('Request timed out. Safaricom accepted the request, but no final confirmation was received.');
@@ -489,6 +566,7 @@
         
         document.getElementById('mpesaWaiting').classList.add('hidden');
         document.getElementById('mpesaConfirmed').classList.remove('hidden');
+        setMpesaStatusNote('Your payment has been confirmed and your order is being finalized.', 'success');
         document.getElementById('mpesaTimer').innerHTML = '<span class="text-green-500">Payment successful!</span>';
 
         const ref = 'QJK' + Math.random().toString(36).substring(2, 8).toUpperCase();

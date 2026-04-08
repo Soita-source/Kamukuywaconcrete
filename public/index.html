@@ -923,8 +923,8 @@
                             <span class="text-xs text-stone-400">STK Push sent to your phone</span>
                         </div>
                         <div id="mpesaWaiting" class="flex items-center gap-2">
-                            <span class="iconify text-stone-600 animate-pulse" data-icon="mdi:circle-outline" data-width="14"></span>
-                            <span class="text-xs text-stone-500">Waiting for PIN entry...</span>
+                            <span id="mpesaWaitingIcon" class="iconify text-stone-600 animate-pulse" data-icon="mdi:circle-outline" data-width="14"></span>
+                            <span id="mpesaWaitingText" class="text-xs text-stone-500">Waiting for PIN entry...</span>
                         </div>
                         <div id="mpesaConfirmed" class="hidden flex items-center gap-2">
                             <span class="iconify text-green-500" data-icon="mdi:check-circle" data-width="14"></span>
@@ -934,8 +934,11 @@
                 </div>
 
                 <div id="mpesaTimer" class="text-xs text-stone-600 mb-4">
-                    Waiting... <span id="countdown">60</span>s remaining
+                    Waiting... <span id="countdown">90</span>s remaining
                 </div>
+                <p id="mpesaStatusNote" class="text-xs text-stone-600 mb-4">
+                    We will update this screen automatically as soon as M-Pesa responds.
+                </p>
                 <button onclick="cancelPayment()" class="text-xs text-stone-600 hover:text-stone-400 transition-colors">Cancel Payment</button>
             </div>
 
