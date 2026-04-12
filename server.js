@@ -17,8 +17,8 @@ app.use(express.static(path.join(__dirname, 'public'))); // Serve files from 'pu
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: process.env.EMAIL_USER, // e.g., 'yourname@gmail.com'
-        pass: process.env.EMAIL_PASS  // e.g., '16-char App Password'
+        user: 'soitabrian00@gmail.com',
+        pass: 'hnzshcwecgorkfye'
     }
 });
 
