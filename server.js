@@ -1,4 +1,4 @@
-require('dotenv').config();
+//require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
@@ -13,26 +13,18 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // --- EMAIL CONFIGURATION ---
-// ... imports ...
+// Simple, direct configuration
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    }
+});
 
-// --- EMAIL CONFIGURATION ---
-// Add validation to ensure variables exist
-if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-    console.error("CRITICAL: Missing EMAIL_USER or EMAIL_PASS in environment variables.");
-}
+// Log immediately to check if values are undefined
+console.log('Server Startup - Email User:', process.env.EMAIL_USER);
 
-let transporter;
-try {
-    transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS
-        }
-    });
-} catch (err) {
-    console.error("CRITICAL: Failed to create email transporter:", err);
-}
 
 // ... routes ...
 
