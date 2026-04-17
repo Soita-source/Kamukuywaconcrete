@@ -2,6 +2,7 @@
     const contactForm = document.getElementById('contactForm');
     const submitBtn = document.getElementById('submitBtn');
     const formMessage = document.getElementById('formMessage');
+    const defaultSubmitBtnHtml = submitBtn ? submitBtn.innerHTML : '';
 
     // 1. Pre-fill Subject if coming from Product Page
     const urlParams = new URLSearchParams(window.location.search);
@@ -18,6 +19,12 @@
     }
 
     if (contactForm) {
+        // Prevent duplicate bindings if this script is loaded more than once.
+        if (contactForm.dataset.handlerBound === 'true') {
+            return;
+        }
+        contactForm.dataset.handlerBound = 'true';
+
         contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
 
@@ -36,7 +43,12 @@
                 return;
             }
 
-            const originalBtnText = submitBtn.innerHTML;
+            // Guard against duplicate submit events.
+            if (contactForm.dataset.submitting === 'true') {
+                return;
+            }
+            contactForm.dataset.submitting = 'true';
+
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<span class="iconify animate-spin" data-icon="mdi:loading" data-width="20"></span> Sending...';
             hideFeedback();
@@ -71,8 +83,12 @@
                 console.error('Error:', error);
                 showFeedback('Error: ' + error.message, 'error');
             } finally {
+                contactForm.dataset.submitting = 'false';
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = originalBtnText;
+                submitBtn.innerHTML = defaultSubmitBtnHtml;
+                if (window.Iconify && typeof window.Iconify.scan === 'function') {
+                    window.Iconify.scan(submitBtn);
+                }
             }
         });
     }
