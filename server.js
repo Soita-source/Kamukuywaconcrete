@@ -1,4 +1,4 @@
-//require('dotenv').config();
+require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
@@ -13,17 +13,24 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // --- EMAIL CONFIGURATION ---
-// Simple, direct configuration
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.MY_EMAIL_USER,
-        pass: process.env.MY_EMAIL_PASS
-    }
-});
+const emailUser = process.env.MY_EMAIL_USER || process.env.EMAIL_USER;
+const emailPass = process.env.MY_EMAIL_PASS || process.env.EMAIL_PASS;
+const hasEmailCredentials = Boolean(emailUser && emailPass);
 
-// Log immediately to check if values are undefined
-console.log('Server Startup - Email User:', process.env.EMAIL_USER);
+const transporter = hasEmailCredentials
+    ? nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: emailUser,
+            pass: emailPass
+        }
+    })
+    : null;
+
+console.log('Server Startup - Email User:', emailUser || '[missing]');
+if (!hasEmailCredentials) {
+    console.warn('Email credentials are missing. Set MY_EMAIL_USER and MY_EMAIL_PASS in .env');
+}
 
 
 // ... routes ...
@@ -33,14 +40,17 @@ app.post('/api/contact', async (req, res) => {
 
     // Check if transporter failed to initialize
     if (!transporter) {
-        return res.status(500).json({ success: false, message: "Email service is not configured correctly." });
+        return res.status(500).json({
+            success: false,
+            message: "Email service is not configured correctly. Missing SMTP credentials."
+        });
     }
 
     const { name, email, phone, product, quantity, deliveryDate, message } = req.body;
 
     const mailOptions = {
-        from: `"Kamukuywa Concrete" <${process.env.EMAIL_USER}>`,
-        to: process.env.EMAIL_USER,
+        from: `"Kamukuywa Concrete" <${emailUser}>`,
+        to: emailUser,
         subject: `New Order: ${product || 'Enquiry'}`,
         text: `
             Name: ${name} (${email})
