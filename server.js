@@ -6,6 +6,7 @@ const nodemailer = require('nodemailer');
 
 const app = express();
 const PORT = process.env.PORT || 30001;
+const EMAIL_HEADER_INJECTION_PATTERN = /[\r\n]/;
 
 // Middleware
 app.use(cors());
@@ -32,6 +33,18 @@ if (!hasEmailCredentials) {
     console.warn('Email credentials are missing. Set MY_EMAIL_USER and MY_EMAIL_PASS in .env');
 }
 
+function sanitizeHeaderText(value = '') {
+    return String(value || '').replace(/[\r\n]+/g, ' ').trim();
+}
+
+function isValidReplyToEmail(value = '') {
+    const trimmed = String(value || '').trim();
+    if (!trimmed || EMAIL_HEADER_INJECTION_PATTERN.test(trimmed)) {
+        return false;
+    }
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed);
+}
+
 
 // ... routes ...
 
@@ -47,11 +60,15 @@ app.post('/api/contact', async (req, res) => {
     }
 
     const { name, email, phone, product, quantity, deliveryDate, message } = req.body;
+    const customerEmail = String(email || '').trim();
+    const safeName = sanitizeHeaderText(name || 'Website Client');
+    const hasReplyTo = isValidReplyToEmail(customerEmail);
 
     const mailOptions = {
         from: `"Kamukuywa Concrete" <${emailUser}>`,
         to: emailUser,
-        subject: `New Order: ${product || 'Enquiry'}`,
+        replyTo: hasReplyTo ? `"${safeName}" <${customerEmail}>` : undefined,
+        subject: `New Order: ${product || 'Enquiry'} - ${safeName}`,
         text: `
             Name: ${name} (${email})
             Phone: ${phone}
