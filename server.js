@@ -65,8 +65,14 @@ app.post('/api/contact', async (req, res) => {
         console.log('[Success] Email sent to client.');
         res.json({ success: true, message: 'Message sent successfully!' });
     } catch (error) {
-        console.error('[Error] Email failed to send:', error);
-        res.status(500).json({ success: false, message: 'Failed to send message.' });
+        console.error('❌ FULL EMAIL ERROR:', error);
+        console.error('❌ ERROR CODE:', error.code);
+        console.error('❌ ERROR RESPONSE:', error.response);
+
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        });
     }
 });
 // 3. Health Check (Good for Vercel monitoring)
