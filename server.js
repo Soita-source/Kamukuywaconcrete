@@ -17,10 +17,13 @@ app.use(express.static(path.join(__dirname, 'public'))); // Serve files from 'pu
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'soitabrian00@gmail.com',
-        pass: 'hnzshcwecgorkfye'
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+
     }
 });
+
+
 
 // --- ROUTES ---
 
@@ -37,8 +40,8 @@ app.post('/api/contact', async (req, res) => {
     console.log(`[New Enquiry] From: ${name} | Product: ${product}`);
 
     const mailOptions = {
-        from: process.env.EMAIL_USER,
-        to: 'soitabrian00@gmail.com',
+        from: `"Kamukuywa Concrete" <${process.env.EMAIL_USER}>`,
+        to: process.env.EMAIL_USER,
         subject: `New Order: ${product || 'Enquiry'}`,
         text: `
             You have received a new message from the Kamukuywa Concrete Website.
