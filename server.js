@@ -10,80 +10,85 @@ const PORT = process.env.PORT || 30001;
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public'))); // Serve files from 'public' folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 // --- EMAIL CONFIGURATION ---
-// IMPORTANT: For Gmail, you must use an App Password, not your login password.
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
+// ... imports ...
 
-    }
-});
+// --- EMAIL CONFIGURATION ---
+// Add validation to ensure variables exist
+if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+    console.error("CRITICAL: Missing EMAIL_USER or EMAIL_PASS in environment variables.");
+}
 
+let transporter;
+try {
+    transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS
+        }
+    });
+} catch (err) {
+    console.error("CRITICAL: Failed to create email transporter:", err);
+}
 
+// ... routes ...
 
-// --- ROUTES ---
-
-// 1. Serve Home Page
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
-// 2. Contact Form API (Receives data from Frontend)
 app.post('/api/contact', async (req, res) => {
-    // 1. Extract data from the request body
-    const { name, email, phone, product, quantity, deliveryDate, message } = req.body;
+    console.log("Request received at /api/contact");
 
-    console.log(`[New Enquiry] From: ${name} | Product: ${product}`);
+    // Check if transporter failed to initialize
+    if (!transporter) {
+        return res.status(500).json({ success: false, message: "Email service is not configured correctly." });
+    }
+
+    const { name, email, phone, product, quantity, deliveryDate, message } = req.body;
 
     const mailOptions = {
         from: `"Kamukuywa Concrete" <${process.env.EMAIL_USER}>`,
         to: process.env.EMAIL_USER,
         subject: `New Order: ${product || 'Enquiry'}`,
         text: `
-            You have received a new message from the Kamukuywa Concrete Website.
-
-            Name: ${name}
-            Email: ${email}
-            Phone: ${phone || 'Not provided'}
-
-            --- Order Details ---
-            Product: ${product || 'Not specified'}
-            Quantity: ${quantity || 'Not specified'}
-            Delivery Date: ${deliveryDate || 'Not specified'}
-
-            Message:
-            ${message}
+            Name: ${name} (${email})
+            Phone: ${phone}
+            Product: ${product}
+            Qty: ${quantity}
+            Date: ${deliveryDate}
+            Msg: ${message}
         `
     };
 
     try {
-        await transporter.sendMail(mailOptions);
-        console.log('[Success] Email sent to client.');
+        // Use a timeout promise in case the SMTP server hangs
+        await Promise.race([
+            transporter.sendMail(mailOptions),
+            new Promise((_, reject) => setTimeout(() => reject(new Error("Email timeout")), 10000))
+        ]);
+        
+        console.log("Email sent successfully");
         res.json({ success: true, message: 'Message sent successfully!' });
+        
     } catch (error) {
-        console.error('❌ FULL EMAIL ERROR:', error);
-        console.error('❌ ERROR CODE:', error.code);
-        console.error('❌ ERROR RESPONSE:', error.response);
-
-        return res.status(500).json({
-            success: false,
-            message: error.message
+        console.error("Email Send Error:", error.message);
+        // Always return JSON so frontend doesn't crash
+        res.status(500).json({ 
+            success: false, 
+            message: `Failed to send email: ${error.message}` 
         });
     }
 });
-// 3. Health Check (Good for Vercel monitoring)
-app.get('/health', (req, res) => {
-    res.json({ status: 'ok', message: 'Server is running' });
+
+// ... app.listen ...
+
+// Global Error Handler
+app.use((err, req, res, next) => {
+    console.error('❌ UNHANDLED ERROR:', err.stack);
+    res.status(500).json({ success: false, message: 'Unhandled Server Error' });
 });
 
 // Start Server
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
-    console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 });
-
-
