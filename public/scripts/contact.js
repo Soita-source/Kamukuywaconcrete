@@ -41,41 +41,39 @@
             submitBtn.innerHTML = '<span class="iconify animate-spin" data-icon="mdi:loading" data-width="20"></span> Sending...';
             hideFeedback();
 
-                try {
-                    const response = await fetch('/api/contact', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(formData)
-                    });
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
 
-                    console.log('Status Code:', response.status); // <--- CHECK THIS
-
-                    // FIX: Handle empty responses safely
-                    let result = {};
-                    const text = await response.text();
-                    if (text) {
-                        try {
-                            result = JSON.parse(text);
-                        } catch (e) {
-                            // Server sent non-JSON error
-                            result = { message: text }; 
-                        }
+                // Handle empty responses safely
+                let result = {};
+                const text = await response.text();
+                if (text) {
+                    try {
+                        result = JSON.parse(text);
+                    } catch (parseError) {
+                        // Server sent a non-JSON response
+                        result = { message: text };
                     }
+                }
 
-                    if (response.ok) {
-                        showFeedback('Message sent successfully! We will contact you shortly.', 'success');
-                        contactForm.reset();
-                    } else {
-                        // This will now show the specific server error (e.g. "Invalid login")
-                        const errorMsg = result.message || `Server Error (${response.status})`;
-                        throw new Error(errorMsg);
-                    }
-
-                    } catch (error) {
-                    console.error('Error:', error);
-                    // Show the actual error message to the user
-                    showFeedback('Error: ' + error.message, 'error');
-                    }
+                if (response.ok) {
+                    showFeedback('Message sent successfully! We will contact you shortly.', 'success');
+                    contactForm.reset();
+                } else {
+                    const errorMsg = result.message || `Server Error (${response.status})`;
+                    throw new Error(errorMsg);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showFeedback('Error: ' + error.message, 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+            }
         });
     }
 
