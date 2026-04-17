@@ -545,6 +545,67 @@
         </div>
     </section>
 
+    <!-- ========== RECENT DELIVERIES ========== -->
+    <section id="recent-deliveries" class="py-20 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-3">Recent Deliveries</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">A snapshot of recent projects where our materials were supplied. Replace these placeholder photos with your latest site images.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 auto-rows-[170px] gap-4">
+                <figure class="group relative overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 shadow-sm sm:col-span-2 lg:row-span-2">
+                    <a href="images/ballast.jpeg" class="delivery-lightbox-trigger block h-full w-full" data-caption="Residential foundation - Kakamega - 40 tonnes ballast">
+                        <img src="images/ballast.jpeg" alt="Residential foundation delivery in Kakamega" class="h-full w-full object-cover transition duration-500 group-hover:scale-105">
+                    </a>
+                    <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-3 text-xs text-white">Residential foundation - Kakamega - 40 tonnes ballast</figcaption>
+                </figure>
+
+                <figure class="group relative overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 shadow-sm">
+                    <a href="images/sand.jpeg" class="delivery-lightbox-trigger block h-full w-full" data-caption="Perimeter wall works - Bungoma - 25 tonnes river sand">
+                        <img src="images/sand.jpeg" alt="Perimeter wall works delivery in Bungoma" class="h-full w-full object-cover transition duration-500 group-hover:scale-105">
+                    </a>
+                    <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-3 text-xs text-white">Perimeter wall works - Bungoma - 25 tonnes river sand</figcaption>
+                </figure>
+
+                <figure class="group relative overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 shadow-sm lg:row-span-2">
+                    <a href="images/poles1.jpeg" class="delivery-lightbox-trigger block h-full w-full" data-caption="School boundary project - Eldoret - 120 concrete poles">
+                        <img src="images/poles1.jpeg" alt="School boundary project delivery in Eldoret" class="h-full w-full object-cover transition duration-500 group-hover:scale-105">
+                    </a>
+                    <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-3 text-xs text-white">School boundary project - Busia - 120 concrete poles</figcaption>
+                </figure>
+
+                <figure class="group relative overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 shadow-sm">
+                    <a href="images/bricks.jpeg" class="delivery-lightbox-trigger block h-full w-full" data-caption="Duplex shell build - Kisumu - 30 tonnes shaped bricks">
+                        <img src="images/bricks.jpeg" alt="Duplex shell build delivery in Kisumu" class="h-full w-full object-cover transition duration-500 group-hover:scale-105">
+                    </a>
+                    <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-3 text-xs text-white">Duplex shell build - Kimilili - 30 tonnes shaped bricks</figcaption>
+                </figure>
+
+                <figure class="group relative overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 shadow-sm lg:col-span-2">
+                    <a href="images/wallcopings.jpeg" class="delivery-lightbox-trigger block h-full w-full" data-caption="Estate wall finish - Nakuru - 260 wall copings">
+                        <img src="images/wallcopings.jpeg" alt="Estate wall finish delivery in Nakuru" class="h-full w-full object-cover transition duration-500 group-hover:scale-105">
+                    </a>
+                    <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-3 text-xs text-white">Estate wall finish - Kakamega - 260 wall copings</figcaption>
+                </figure>
+
+                <figure class="group relative overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 shadow-sm">
+                    <a href="images/poles2.jpeg" class="delivery-lightbox-trigger block h-full w-full" data-caption="Utility line support - Kitale - 85 concrete poles">
+                        <img src="images/poles2.jpeg" alt="Utility line support delivery in Kitale" class="h-full w-full object-cover transition duration-500 group-hover:scale-105">
+                    </a>
+                    <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-3 text-xs text-white">Utility line support - Kitale - 85 concrete poles</figcaption>
+                </figure>
+
+                <figure class="group relative overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 shadow-sm">
+                    <a href="images/blocks.jpeg" class="delivery-lightbox-trigger block h-full w-full" data-caption="Commercial slab prep - Nairobi - 35 tonnes building sand">
+                        <img src="images/blocks.jpeg" alt="Commercial slab prep delivery in Nairobi" class="h-full w-full object-cover transition duration-500 group-hover:scale-105">
+                    </a>
+                    <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-3 text-xs text-white">Commercial slab prep - Misikhu - 35 tonnes building sand</figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
     <!-- ========== CTA SECTION ========== -->
     <section class="py-20 px-6 bg-white">
         <div class="max-w-5xl mx-auto">
@@ -665,6 +726,19 @@
         </div>
     </a>
 
+    <!-- ========== DELIVERY LIGHTBOX ========== -->
+    <div id="deliveryLightbox" class="fixed inset-0 z-[80] hidden bg-black/90 p-4 sm:p-8">
+        <button id="deliveryLightboxClose" type="button" class="absolute right-4 top-4 rounded-full bg-white/15 p-2 text-white transition hover:bg-white/25" aria-label="Close delivery image viewer">
+            <span class="iconify" data-icon="mdi:close" data-width="22"></span>
+        </button>
+        <div class="mx-auto flex h-full w-full max-w-6xl items-center justify-center">
+            <figure class="w-full">
+                <img id="deliveryLightboxImage" src="" alt="Recent delivery preview" class="max-h-[75vh] w-full rounded-xl object-contain">
+                <figcaption id="deliveryLightboxCaption" class="mt-4 text-center text-sm text-white"></figcaption>
+            </figure>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const whatsappNumber = '254706706034';
@@ -783,6 +857,52 @@
                         const url = "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(message);
                         window.open(url, '_blank', 'noopener,noreferrer');
                     });
+                }
+            });
+
+            const deliveryLightbox = document.getElementById('deliveryLightbox');
+            const deliveryLightboxClose = document.getElementById('deliveryLightboxClose');
+            const deliveryLightboxImage = document.getElementById('deliveryLightboxImage');
+            const deliveryLightboxCaption = document.getElementById('deliveryLightboxCaption');
+
+            function closeDeliveryLightbox() {
+                if (!deliveryLightbox) return;
+                deliveryLightbox.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+
+            function openDeliveryLightbox(imageUrl, captionText) {
+                if (!deliveryLightbox || !deliveryLightboxImage || !deliveryLightboxCaption) return;
+                deliveryLightboxImage.src = imageUrl;
+                deliveryLightboxCaption.textContent = captionText || '';
+                deliveryLightbox.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+
+            document.querySelectorAll('.delivery-lightbox-trigger').forEach(function (trigger) {
+                trigger.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    const imageUrl = trigger.getAttribute('href') || '';
+                    const captionText = trigger.dataset.caption || '';
+                    openDeliveryLightbox(imageUrl, captionText);
+                });
+            });
+
+            if (deliveryLightboxClose) {
+                deliveryLightboxClose.addEventListener('click', closeDeliveryLightbox);
+            }
+
+            if (deliveryLightbox) {
+                deliveryLightbox.addEventListener('click', function (event) {
+                    if (event.target === deliveryLightbox) {
+                        closeDeliveryLightbox();
+                    }
+                });
+            }
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape') {
+                    closeDeliveryLightbox();
                 }
             });
         });
