@@ -159,6 +159,14 @@
             object-position: center;
         }
 
+        .product-card {
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
         .whatsapp-help-link {
             position: fixed;
             left: 24px;

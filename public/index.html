@@ -214,47 +214,91 @@
                 </h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <!-- Product 1 -->
-                    <div class="border border-gray-200 rounded-xl overflow-hidden group hover:shadow-lg transition product-card" data-unit-label="tonnes">
-                        <div class="h-48 bg-gray-100 overflow-hidden flex items-center justify-center">
-                            <img src="images/sand.jpeg" alt="River Sand" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        </div>
-                        <div class="p-6 space-y-4">
-                            <h4 class="text-lg font-bold text-gray-900">River Sand</h4>
-                            <a href="products/river-sand.html" class="text-blue-600 text-sm font-semibold hover:underline">
-                                View Full Details
+                   <div class="border border-gray-200 rounded-xl overflow-hidden group hover:shadow-lg transition product-card" data-unit-label="tonnes">
+
+                        <!-- CLICKABLE IMAGE + TITLE -->
+                        <a href="products/river-sand.html" class="block">
+                            <div class="h-48 bg-gray-100 overflow-hidden flex items-center justify-center">
+                                <img src="images/sand.jpeg" alt="River Sand Supplier in Western Kenya"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            </div>
+
+                            <div class="p-6 pb-2">
+                                <h4 class="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition">
+                                    River Sand
+                                </h4>
+                            </div>
+                        </a>
+
+                        <!-- CONTENT -->
+                        <div class="px-6 pb-6 space-y-4">
+
+                            <!-- SEO LINK -->
+                            <a href="products/river-sand.html"
+                            class="inline-block text-blue-600 text-sm font-semibold hover:underline">
+                            View Full Details →
                             </a>
+
                             <p class="text-sm text-gray-500">
                                 Premium river-washed sand with the perfect grain balance — gives 
-                                you silky-smooth plaster finishes and crack-free concrete that stands the test of time. 
-                                The contractor's first choice.
+                                you silky-smooth plaster finishes and crack-free concrete that stands the test of time.
                             </p>
+
+                            <!-- BUTTONS -->
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                <a href="#" target="_blank" rel="noopener noreferrer" class="whatsapp-order-btn inline-flex items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-blue-700">
-                                    Order on WhatsApp
+
+                                <!-- WHATSAPP (SMART MESSAGE) -->
+                                <a href="https://wa.me/254706706034?text=Hello%20Kamukuywa%20Concrete,%20I%20want%20River%20Sand"
+                                target="_blank"
+                                class="whatsapp-order-btn inline-flex items-center justify-center rounded-md bg-green-600 px-3 py-2 text-xs font-semibold text-white hover:bg-green-700 transition">
+                                Order on WhatsApp
                                 </a>
-                                <button type="button" class="quote-toggle-btn inline-flex items-center justify-center rounded-md border border-blue-600 px-3 py-2 text-xs font-semibold text-blue-700 transition hover:bg-blue-50" aria-expanded="false">
+
+                                <!-- TOGGLE FORM -->
+                                <button type="button"
+                                    class="quote-toggle-btn inline-flex items-center justify-center rounded-md border border-blue-600 px-3 py-2 text-xs font-semibold text-blue-700 hover:bg-blue-50 transition"
+                                    aria-expanded="false">
                                     Get Quote
                                 </button>
                             </div>
+
+                            <!-- FORM -->
                             <form class="quote-inline-form hidden space-y-3 rounded-lg border border-blue-100 bg-blue-50 p-3">
-                                <label class="block text-xs font-semibold uppercase tracking-wide text-blue-800">Quantity</label>
+
+                                <label class="block text-xs font-semibold uppercase tracking-wide text-blue-800">
+                                    Quantity
+                                </label>
+
                                 <div class="relative">
-                                    <input type="number" name="quantity" min="1" step="1" value="1" class="w-full rounded-md border border-blue-200 px-3 py-2 pr-20 text-sm text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200">
-                                    <span class="quote-unit-label pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-blue-700">tonnes</span>
+                                    <input type="number" name="quantity" min="1" value="1"
+                                        class="w-full rounded-md border border-blue-200 px-3 py-2 pr-20 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200">
+
+                                    <span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-blue-700">
+                                        tonnes
+                                    </span>
                                 </div>
-                                <label class="block text-xs font-semibold uppercase tracking-wide text-blue-800">Delivery Location</label>
-                                <select name="location" class="w-full rounded-md border border-blue-200 px-3 py-2 text-sm text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200">
-                                    <option value="Bungoma">Bungoma</option>
-                                    <option value="Kakamega">Kakamega</option>
-                                    <option value="Misikhu">Misikhu</option>
-                                    <option value="Kitale">Kitale</option>
-                                    <option value="Kimilili">Kimilili</option>
-                                    <option value="Busia">Busia</option>
-                                    <option value="Webuye">Webuye</option>
-                                    <option value="Other">Other</option>
+
+                                <label class="block text-xs font-semibold uppercase tracking-wide text-blue-800">
+                                    Delivery Location
+                                </label>
+
+                                <select name="location"
+                                    class="w-full rounded-md border border-blue-200 px-3 py-2 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200">
+                                    <option>Bungoma</option>
+                                    <option>Kakamega</option>
+                                    <option>Kitale</option>
+                                    <option>Webuye</option>
+                                    <option>Busia</option>
+                                    <option>Other</option>
                                 </select>
-                                <p class="text-xs text-gray-600">Final quote will be confirmed on WhatsApp</p>
-                                <button type="submit" class="quote-send-btn inline-flex w-full items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-blue-700">
+
+                                <p class="text-xs text-gray-600">
+                                    Final quote will be confirmed on WhatsApp
+                                </p>
+
+                                <!-- SMART SUBMIT -->
+                                <button type="submit"
+                                    class="quote-send-btn w-full inline-flex items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-xs font-semibold text-white hover:bg-blue-700 transition">
                                     Request Quote on WhatsApp
                                 </button>
                             </form>
@@ -263,98 +307,195 @@
 
                     <!-- Product 2 -->
                     <div class="border border-gray-200 rounded-xl overflow-hidden group hover:shadow-lg transition product-card" data-unit-label="tonnes">
-                        <div class="h-48 bg-gray-100 overflow-hidden flex items-center justify-center">
-                            <img src="images/ballast.jpeg" alt="Ballast" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        </div>
-                        <div class="p-6 space-y-4">
-                            <h4 class="text-lg font-bold text-gray-900">Ballast</h4>
-                            <a href="products/ballast.html" class="text-blue-600 text-sm font-semibold hover:underline">
-                                View Full Details
+
+                        <!-- CLICKABLE IMAGE + TITLE -->
+                        <a href="products/ballast.html" class="block">
+
+                            <div class="h-48 bg-gray-100 overflow-hidden flex items-center justify-center">
+                                <img src="images/ballast.jpeg" alt="Ballast Supplier in Western Kenya"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            </div>
+
+                            <div class="p-6 pb-2">
+                                <h4 class="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition">
+                                    Ballast
+                                </h4>
+                            </div>
+                        </a>
+
+                        <!-- CONTENT -->
+                        <div class="px-6 pb-6 space-y-4">
+
+                            <!-- SEO LINK -->
+                            <a href="products/ballast.html"
+                            class="inline-block text-blue-600 text-sm font-semibold hover:underline">
+                                View Full Details →
                             </a>
+
                             <p class="text-sm text-gray-500">
-                                Hand-selected, machine-crushed stone built to lock tight and carry serious weight.
-                                The unshakeable backbone of strong foundations, solid slabs, and structures that last generations.
+                                Hand-selected, machine-crushed stone built to lock tight and carry serious weight —
+                                the unshakeable backbone of strong foundations, solid slabs, and structures that last generations.
                             </p>
+
+                            <!-- BUTTONS -->
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                <a href="#" target="_blank" rel="noopener noreferrer" class="whatsapp-order-btn inline-flex items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-blue-700">
+
+                                <!-- WHATSAPP (SMART MESSAGE) -->
+                                <a href="https://wa.me/254706706034?text=Hello%20Kamukuywa%20Concrete,%20I%20want%20Ballast"
+                                target="_blank" rel="noopener noreferrer"
+                                class="whatsapp-order-btn inline-flex items-center justify-center rounded-md bg-green-600 px-3 py-2 text-xs font-semibold text-white hover:bg-green-700 transition">
                                     Order on WhatsApp
                                 </a>
-                                <button type="button" class="quote-toggle-btn inline-flex items-center justify-center rounded-md border border-blue-600 px-3 py-2 text-xs font-semibold text-blue-700 transition hover:bg-blue-50" aria-expanded="false">
+
+                                <!-- TOGGLE FORM -->
+                                <button type="button"
+                                        class="quote-toggle-btn inline-flex items-center justify-center rounded-md border border-blue-600 px-3 py-2 text-xs font-semibold text-blue-700 hover:bg-blue-50 transition"
+                                        aria-expanded="false">
                                     Get Quote
                                 </button>
                             </div>
+
+                            <!-- FORM -->
                             <form class="quote-inline-form hidden space-y-3 rounded-lg border border-blue-100 bg-blue-50 p-3">
-                                <label class="block text-xs font-semibold uppercase tracking-wide text-blue-800">Quantity</label>
+
+                                <label class="block text-xs font-semibold uppercase tracking-wide text-blue-800">
+                                    Quantity
+                                </label>
+
                                 <div class="relative">
-                                    <input type="number" name="quantity" min="1" step="1" value="1" class="w-full rounded-md border border-blue-200 px-3 py-2 pr-20 text-sm text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200">
-                                    <span class="quote-unit-label pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-blue-700">tonnes</span>
+                                    <input type="number" name="quantity" min="1" step="1" value="1"
+                                        class="w-full rounded-md border border-blue-200 px-3 py-2 pr-20 text-sm text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200">
+
+                                    <span class="quote-unit-label pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-blue-700">
+                                        tonnes
+                                    </span>
                                 </div>
-                                <label class="block text-xs font-semibold uppercase tracking-wide text-blue-800">Delivery Location</label>
-                                <select name="location" class="w-full rounded-md border border-blue-200 px-3 py-2 text-sm text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200">
+
+                                <label class="block text-xs font-semibold uppercase tracking-wide text-blue-800">
+                                    Delivery Location
+                                </label>
+
+                                <select name="location"
+                                        class="w-full rounded-md border border-blue-200 px-3 py-2 text-sm text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200">
                                     <option value="Bungoma">Bungoma</option>
                                     <option value="Kakamega">Kakamega</option>
                                     <option value="Misikhu">Misikhu</option>
                                     <option value="Kitale">Kitale</option>
                                     <option value="Kimilili">Kimilili</option>
-                                    <option value="Busia">Busia</option>
                                     <option value="Webuye">Webuye</option>
+                                    <option value="Busia">Busia</option>
                                     <option value="Other">Other</option>
                                 </select>
-                                <p class="text-xs text-gray-600">Final quote will be confirmed on WhatsApp</p>
-                                <button type="submit" class="quote-send-btn inline-flex w-full items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-blue-700">
+
+                                <p class="text-xs text-gray-600">
+                                    Final quote will be confirmed on WhatsApp
+                                </p>
+
+                                <!-- SMART SUBMIT -->
+                                <button type="submit"
+                                        class="quote-send-btn w-full inline-flex items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-xs font-semibold text-white hover:bg-blue-700 transition">
                                     Request Quote on WhatsApp
                                 </button>
                             </form>
                         </div>
                     </div>
 
+
                     <!-- Product 3 -->
                     <div class="border border-gray-200 rounded-xl overflow-hidden group hover:shadow-lg transition product-card" data-unit-label="tonnes">
-                        <div class="h-48 bg-gray-100 overflow-hidden flex items-center justify-center">
-                            <img src="images/sadnd2.jpeg" alt="Building Sand" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        </div>
-                        <div class="p-6 space-y-4">
-                            <h4 class="text-lg font-bold text-gray-900">Building Sand</h4>
-                            <a href="products/building-sand.html" class="text-blue-600 text-sm font-semibold hover:underline">
-                                View Full Details
-                            </a>
-                            <p class="text-sm text-gray-500">
-                                Rich, coarse-grained sand that grips cement like nothing else — making mortar stronger, 
-                                blocks tighter, and walls that refuse to crack. Trusted by masons across the region.
-                            </p>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                <a href="#" target="_blank" rel="noopener noreferrer" class="whatsapp-order-btn inline-flex items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-blue-700">
-                                    Order on WhatsApp
-                                </a>
-                                <button type="button" class="quote-toggle-btn inline-flex items-center justify-center rounded-md border border-blue-600 px-3 py-2 text-xs font-semibold text-blue-700 transition hover:bg-blue-50" aria-expanded="false">
-                                    Get Quote
-                                </button>
-                            </div>
-                            <form class="quote-inline-form hidden space-y-3 rounded-lg border border-blue-100 bg-blue-50 p-3">
-                                <label class="block text-xs font-semibold uppercase tracking-wide text-blue-800">Quantity</label>
-                                <div class="relative">
-                                    <input type="number" name="quantity" min="1" step="1" value="1" class="w-full rounded-md border border-blue-200 px-3 py-2 pr-20 text-sm text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200">
-                                    <span class="quote-unit-label pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-blue-700">tonnes</span>
-                                </div>
-                                <label class="block text-xs font-semibold uppercase tracking-wide text-blue-800">Delivery Location</label>
-                                <select name="location" class="w-full rounded-md border border-blue-200 px-3 py-2 text-sm text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200">
-                                    <option value="Bungoma">Bungoma</option>
-                                    <option value="Kakamega">Kakamega</option>
-                                    <option value="Misikhu">Misikhu</option>
-                                    <option value="Kitale">Kitale</option>
-                                    <option value="Kimilili">Kimilili</option>
-                                    <option value="Busia">Busia</option>
-                                    <option value="Webuye">Webuye</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                                <p class="text-xs text-gray-600">Final quote will be confirmed on WhatsApp</p>
-                                <button type="submit" class="quote-send-btn inline-flex w-full items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-blue-700">
-                                    Request Quote on WhatsApp
-                                </button>
-                            </form>
-                        </div>
+
+                <!-- CLICKABLE IMAGE + TITLE -->
+                <a href="products/building-sand.html" class="block">
+
+                    <div class="h-48 bg-gray-100 overflow-hidden flex items-center justify-center">
+                        <img src="images/sadnd2.jpeg" alt="Building Sand Supplier in Western Kenya"
+                            class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                     </div>
+
+                    <div class="p-6 pb-2">
+                        <h4 class="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition">
+                            Building Sand
+                        </h4>
+                    </div>
+                </a>
+
+                <!-- CONTENT -->
+                <div class="px-6 pb-6 space-y-4">
+
+                    <!-- SEO LINK -->
+                    <a href="products/building-sand.html"
+                    class="inline-block text-blue-600 text-sm font-semibold hover:underline">
+                        View Full Details →
+                    </a>
+
+                    <p class="text-sm text-gray-500">
+                        Rich, coarse-grained sand that grips cement like nothing else — making mortar stronger,
+                        blocks tighter, and walls that refuse to crack. Trusted by masons across the region.
+                    </p>
+
+                    <!-- BUTTONS -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+
+                        <!-- WHATSAPP (SMART MESSAGE) -->
+                        <a href="https://wa.me/254706706034?text=Hello%20Kamukuywa%20Concrete,%20I%20want%20Building%20Sand"
+                        target="_blank" rel="noopener noreferrer"
+                        class="whatsapp-order-btn inline-flex items-center justify-center rounded-md bg-green-600 px-3 py-2 text-xs font-semibold text-white hover:bg-green-700 transition">
+                            Order on WhatsApp
+                        </a>
+
+                        <!-- TOGGLE FORM -->
+                        <button type="button"
+                                class="quote-toggle-btn inline-flex items-center justify-center rounded-md border border-blue-600 px-3 py-2 text-xs font-semibold text-blue-700 hover:bg-blue-50 transition"
+                                aria-expanded="false">
+                            Get Quote
+                        </button>
+                    </div>
+
+                    <!-- FORM -->
+                    <form class="quote-inline-form hidden space-y-3 rounded-lg border border-blue-100 bg-blue-50 p-3">
+
+                        <label class="block text-xs font-semibold uppercase tracking-wide text-blue-800">
+                            Quantity
+                        </label>
+
+                        <div class="relative">
+                            <input type="number" name="quantity" min="1" step="1" value="1"
+                                class="w-full rounded-md border border-blue-200 px-3 py-2 pr-20 text-sm text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200">
+
+                            <span class="quote-unit-label pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-blue-700">
+                                tonnes
+                            </span>
+                        </div>
+
+                        <label class="block text-xs font-semibold uppercase tracking-wide text-blue-800">
+                            Delivery Location
+                        </label>
+
+                        <select name="location"
+                                class="w-full rounded-md border border-blue-200 px-3 py-2 text-sm text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200">
+                            <option value="Bungoma">Bungoma</option>
+                            <option value="Kakamega">Kakamega</option>
+                            <option value="Misikhu">Misikhu</option>
+                            <option value="Kitale">Kitale</option>
+                            <option value="Kimilili">Kimilili</option>
+                            <option value="Webuye">Webuye</option>
+                            <option value="Busia">Busia</option>
+                            <option value="Other">Other</option>
+                        </select>
+
+                        <p class="text-xs text-gray-600">
+                            Final quote will be confirmed on WhatsApp
+                        </p>
+
+                        <!-- SMART SUBMIT -->
+                        <button type="submit"
+                                class="quote-send-btn w-full inline-flex items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-xs font-semibold text-white hover:bg-blue-700 transition">
+                            Request Quote on WhatsApp
+                        </button>
+                    </form>
                 </div>
+            </div>
+
             </div>
 
             <!-- Structural Category -->
@@ -366,146 +507,293 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <!-- Product 4 -->
                     <div class="border border-gray-200 rounded-xl overflow-hidden group hover:shadow-lg transition product-card" data-unit-label="poles">
-                        <div class="h-48 bg-gray-100 overflow-hidden flex items-center justify-center">
-                            <img src="images/poles1.jpeg" alt="Concrete Poles" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        </div>
-                        <div class="p-6 space-y-4">
-                            <h4 class="text-lg font-bold text-gray-900">Concrete Poles</h4>
-                             <a href="products/concrete-poles.html" class="text-blue-600 text-sm font-semibold hover:underline">
-                                View Full Details
+
+                        <!-- CLICKABLE IMAGE + TITLE -->
+                        <a href="products/concrete-poles.html" class="block">
+
+                            <div class="h-48 bg-gray-100 overflow-hidden flex items-center justify-center">
+                                <img src="images/poles1.jpeg" alt="Concrete Poles Supplier in Western Kenya"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            </div>
+
+                            <div class="p-6 pb-2">
+                                <h4 class="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition">
+                                    Concrete Poles
+                                </h4>
+                            </div>
+                        </a>
+
+                        <!-- CONTENT -->
+                        <div class="px-6 pb-6 space-y-4">
+
+                            <!-- SEO LINK -->
+                            <a href="products/concrete-poles.html"
+                            class="inline-block text-blue-600 text-sm font-semibold hover:underline">
+                                View Full Details →
                             </a>
+
                             <p class="text-sm text-gray-500">
-                                Heavy-duty, weather-resistant concrete poles engineered to outlast wood and steel. 
-                                Termite-proof, fire-proof, and rot-proof — install once, forget for decades. 
+                                Heavy-duty, weather-resistant concrete poles engineered to outlast wood and steel.
+                                Termite-proof, fire-proof, and rot-proof — install once, forget for decades.
                                 Perfect for fencing, power lines, and perimeter security.
                             </p>
+
+                            <!-- BUTTONS -->
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                <a href="#" target="_blank" rel="noopener noreferrer" class="whatsapp-order-btn inline-flex items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-blue-700">
+
+                                <!-- WHATSAPP (SMART MESSAGE) -->
+                                <a href="https://wa.me/254706706034?text=Hello%20Kamukuywa%20Concrete,%20I%20want%20Concrete%20Poles"
+                                target="_blank" rel="noopener noreferrer"
+                                class="whatsapp-order-btn inline-flex items-center justify-center rounded-md bg-green-600 px-3 py-2 text-xs font-semibold text-white hover:bg-green-700 transition">
                                     Order on WhatsApp
                                 </a>
-                                <button type="button" class="quote-toggle-btn inline-flex items-center justify-center rounded-md border border-blue-600 px-3 py-2 text-xs font-semibold text-blue-700 transition hover:bg-blue-50" aria-expanded="false">
+
+                                <!-- TOGGLE FORM -->
+                                <button type="button"
+                                        class="quote-toggle-btn inline-flex items-center justify-center rounded-md border border-blue-600 px-3 py-2 text-xs font-semibold text-blue-700 hover:bg-blue-50 transition"
+                                        aria-expanded="false">
                                     Get Quote
                                 </button>
                             </div>
+
+                            <!-- FORM -->
                             <form class="quote-inline-form hidden space-y-3 rounded-lg border border-blue-100 bg-blue-50 p-3">
-                                <label class="block text-xs font-semibold uppercase tracking-wide text-blue-800">Quantity</label>
+
+                                <label class="block text-xs font-semibold uppercase tracking-wide text-blue-800">
+                                    Quantity
+                                </label>
+
                                 <div class="relative">
-                                    <input type="number" name="quantity" min="1" step="1" value="1" class="w-full rounded-md border border-blue-200 px-3 py-2 pr-20 text-sm text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200">
-                                    <span class="quote-unit-label pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-blue-700">poles</span>
+                                    <input type="number" name="quantity" min="1" step="1" value="1"
+                                        class="w-full rounded-md border border-blue-200 px-3 py-2 pr-20 text-sm text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200">
+
+                                    <span class="quote-unit-label pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-blue-700">
+                                        poles
+                                    </span>
                                 </div>
-                                <label class="block text-xs font-semibold uppercase tracking-wide text-blue-800">Delivery Location</label>
-                                <select name="location" class="w-full rounded-md border border-blue-200 px-3 py-2 text-sm text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200">
+
+                                <label class="block text-xs font-semibold uppercase tracking-wide text-blue-800">
+                                    Delivery Location
+                                </label>
+
+                                <select name="location"
+                                        class="w-full rounded-md border border-blue-200 px-3 py-2 text-sm text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200">
                                     <option value="Bungoma">Bungoma</option>
                                     <option value="Kakamega">Kakamega</option>
                                     <option value="Misikhu">Misikhu</option>
                                     <option value="Kitale">Kitale</option>
                                     <option value="Kimilili">Kimilili</option>
-                                    <option value="Busia">Busia</option>
                                     <option value="Webuye">Webuye</option>
+                                    <option value="Busia">Busia</option>
                                     <option value="Other">Other</option>
                                 </select>
-                                <p class="text-xs text-gray-600">Final quote will be confirmed on WhatsApp</p>
-                                <button type="submit" class="quote-send-btn inline-flex w-full items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-blue-700">
+
+                                <p class="text-xs text-gray-600">
+                                    Final quote will be confirmed on WhatsApp
+                                </p>
+
+                                <!-- SMART SUBMIT -->
+                                <button type="submit"
+                                        class="quote-send-btn w-full inline-flex items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-xs font-semibold text-white hover:bg-blue-700 transition">
                                     Request Quote on WhatsApp
                                 </button>
                             </form>
                         </div>
                     </div>
+
 
                     <!-- Product 5 -->
                     <div class="border border-gray-200 rounded-xl overflow-hidden group hover:shadow-lg transition product-card" data-unit-label="tonnes">
-                        <div class="h-48 bg-gray-100 flex items-center justify-center overflow-hidden">
-                            <img src="images/bricks.jpeg" alt="Shaped Bricks" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        </div>
-                        <div class="p-6 space-y-4">
-                            <h4 class="text-lg font-bold text-gray-900">Dressed bushstones</h4>
-                             <a href="products/dressed-bushstones.html" class="text-blue-600 text-sm font-semibold hover:underline">
-                                View Full Details
+
+                        <!-- CLICKABLE IMAGE + TITLE -->
+                        <a href="products/dressed-bushstones.html" class="block">
+
+                            <div class="h-48 bg-gray-100 overflow-hidden flex items-center justify-center">
+                                <img src="images/dressed-bushstones.jpeg" alt="Dressed Bushstones Supplier in Western Kenya"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            </div>
+
+                            <div class="p-6 pb-2">
+                                <h4 class="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition">
+                                    Dressed Bushstones
+                                </h4>
+                            </div>
+                        </a>
+
+                        <!-- CONTENT -->
+                        <div class="px-6 pb-6 space-y-4">
+
+                            <!-- SEO LINK -->
+                            <a href="products/dressed-bushstones.html"
+                            class="inline-block text-blue-600 text-sm font-semibold hover:underline">
+                                View Full Details →
                             </a>
+
                             <p class="text-sm text-gray-500">
-                                Precision-molded bricks with sharp edges and uniform finish — lay faster, 
-                                look cleaner, and turn ordinary walls into stunning architectural statements. 
+                                Precision-molded bricks with sharp edges and uniform finish — lay faster,
+                                look cleaner, and turn ordinary walls into stunning architectural statements.
                                 Strength and beauty in every piece.
                             </p>
+
+                            <!-- BUTTONS -->
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                <a href="#" target="_blank" rel="noopener noreferrer" class="whatsapp-order-btn inline-flex items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-blue-700">
+
+                                <!-- WHATSAPP (SMART MESSAGE) -->
+                                <a href="https://wa.me/254706706034?text=Hello%20Kamukuywa%20Concrete,%20I%20want%20Dressed%20Bushstones"
+                                target="_blank" rel="noopener noreferrer"
+                                class="whatsapp-order-btn inline-flex items-center justify-center rounded-md bg-green-600 px-3 py-2 text-xs font-semibold text-white hover:bg-green-700 transition">
                                     Order on WhatsApp
                                 </a>
-                                <button type="button" class="quote-toggle-btn inline-flex items-center justify-center rounded-md border border-blue-600 px-3 py-2 text-xs font-semibold text-blue-700 transition hover:bg-blue-50" aria-expanded="false">
+
+                                <!-- TOGGLE FORM -->
+                                <button type="button"
+                                        class="quote-toggle-btn inline-flex items-center justify-center rounded-md border border-blue-600 px-3 py-2 text-xs font-semibold text-blue-700 hover:bg-blue-50 transition"
+                                        aria-expanded="false">
                                     Get Quote
                                 </button>
                             </div>
+
+                            <!-- FORM -->
                             <form class="quote-inline-form hidden space-y-3 rounded-lg border border-blue-100 bg-blue-50 p-3">
-                                <label class="block text-xs font-semibold uppercase tracking-wide text-blue-800">Quantity</label>
+
+                                <label class="block text-xs font-semibold uppercase tracking-wide text-blue-800">
+                                    Quantity
+                                </label>
+
                                 <div class="relative">
-                                    <input type="number" name="quantity" min="1" step="1" value="1" class="w-full rounded-md border border-blue-200 px-3 py-2 pr-20 text-sm text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200">
-                                    <span class="quote-unit-label pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-blue-700">tonnes</span>
+                                    <input type="number" name="quantity" min="1" step="1" value="1"
+                                        class="w-full rounded-md border border-blue-200 px-3 py-2 pr-20 text-sm text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200">
+
+                                    <span class="quote-unit-label pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-blue-700">
+                                        tonnes
+                                    </span>
                                 </div>
-                                <label class="block text-xs font-semibold uppercase tracking-wide text-blue-800">Delivery Location</label>
-                                <select name="location" class="w-full rounded-md border border-blue-200 px-3 py-2 text-sm text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200">
+
+                                <label class="block text-xs font-semibold uppercase tracking-wide text-blue-800">
+                                    Delivery Location
+                                </label>
+
+                                <select name="location"
+                                        class="w-full rounded-md border border-blue-200 px-3 py-2 text-sm text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200">
                                     <option value="Bungoma">Bungoma</option>
                                     <option value="Kakamega">Kakamega</option>
                                     <option value="Misikhu">Misikhu</option>
                                     <option value="Kitale">Kitale</option>
                                     <option value="Kimilili">Kimilili</option>
-                                    <option value="Busia">Busia</option>
                                     <option value="Webuye">Webuye</option>
+                                    <option value="Busia">Busia</option>
                                     <option value="Other">Other</option>
                                 </select>
-                                <p class="text-xs text-gray-600">Final quote will be confirmed on WhatsApp</p>
-                                <button type="submit" class="quote-send-btn inline-flex w-full items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-blue-700">
+
+                                <p class="text-xs text-gray-600">
+                                    Final quote will be confirmed on WhatsApp
+                                </p>
+
+                                <!-- SMART SUBMIT -->
+                                <button type="submit"
+                                        class="quote-send-btn w-full inline-flex items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-xs font-semibold text-white hover:bg-blue-700 transition">
                                     Request Quote on WhatsApp
                                 </button>
                             </form>
                         </div>
                     </div>
 
+
                     <!-- Product 6 -->
                     <div class="border border-gray-200 rounded-xl overflow-hidden group hover:shadow-lg transition product-card" data-unit-label="pieces">
-                        <div class="h-48 bg-gray-100 overflow-hidden flex items-center justify-center">
-                            <img src="images/wallcopings.jpeg" alt="Wall Copings" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        </div>
-                        <div class="p-6 space-y-4">
-                            <h4 class="text-lg font-bold text-gray-900">Wall Copings</h4>
-                             <a href="products/wall-copings.html" class="text-blue-600 text-sm font-semibold hover:underline">
-                                View Full Details
+
+                        <!-- CLICKABLE IMAGE + TITLE -->
+                        <a href="products/wall-copings.html" class="block">
+
+                            <div class="h-48 bg-gray-100 overflow-hidden flex items-center justify-center">
+                                <img src="images/wallcopings.jpeg" alt="Wall Copings Supplier in Western Kenya"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            </div>
+
+                            <div class="p-6 pb-2">
+                                <h4 class="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition">
+                                    Wall Copings
+                                </h4>
+                            </div>
+                        </a>
+
+                        <!-- CONTENT -->
+                        <div class="px-6 pb-6 space-y-4">
+
+                            <!-- SEO LINK -->
+                            <a href="products/wall-copings.html"
+                            class="inline-block text-blue-600 text-sm font-semibold hover:underline">
+                                View Full Details →
                             </a>
+
                             <p class="text-sm text-gray-500">
-                                Sleek, weather-sealed copings that crown your walls in style while shielding them from rain damage. 
+                                Sleek, weather-sealed copings that crown your walls in style while shielding them from rain damage.
                                 The finishing touch that protects your investment and boosts curb appeal instantly.
                             </p>
+
+                            <!-- BUTTONS -->
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                <a href="#" target="_blank" rel="noopener noreferrer" class="whatsapp-order-btn inline-flex items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-blue-700">
+
+                                <!-- WHATSAPP (SMART MESSAGE) -->
+                                <a href="https://wa.me/254706706034?text=Hello%20Kamukuywa%20Concrete,%20I%20want%20Wall%20Copings"
+                                target="_blank" rel="noopener noreferrer"
+                                class="whatsapp-order-btn inline-flex items-center justify-center rounded-md bg-green-600 px-3 py-2 text-xs font-semibold text-white hover:bg-green-700 transition">
                                     Order on WhatsApp
                                 </a>
-                                <button type="button" class="quote-toggle-btn inline-flex items-center justify-center rounded-md border border-blue-600 px-3 py-2 text-xs font-semibold text-blue-700 transition hover:bg-blue-50" aria-expanded="false">
+
+                                <!-- TOGGLE FORM -->
+                                <button type="button"
+                                        class="quote-toggle-btn inline-flex items-center justify-center rounded-md border border-blue-600 px-3 py-2 text-xs font-semibold text-blue-700 hover:bg-blue-50 transition"
+                                        aria-expanded="false">
                                     Get Quote
                                 </button>
                             </div>
+
+                            <!-- FORM -->
                             <form class="quote-inline-form hidden space-y-3 rounded-lg border border-blue-100 bg-blue-50 p-3">
-                                <label class="block text-xs font-semibold uppercase tracking-wide text-blue-800">Quantity</label>
+
+                                <label class="block text-xs font-semibold uppercase tracking-wide text-blue-800">
+                                    Quantity
+                                </label>
+
                                 <div class="relative">
-                                    <input type="number" name="quantity" min="1" step="1" value="1" class="w-full rounded-md border border-blue-200 px-3 py-2 pr-20 text-sm text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200">
-                                    <span class="quote-unit-label pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-blue-700">pieces</span>
+                                    <input type="number" name="quantity" min="1" step="1" value="1"
+                                        class="w-full rounded-md border border-blue-200 px-3 py-2 pr-20 text-sm text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200">
+
+                                    <span class="quote-unit-label pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-blue-700">
+                                        pieces
+                                    </span>
                                 </div>
-                                <label class="block text-xs font-semibold uppercase tracking-wide text-blue-800">Delivery Location</label>
-                                <select name="location" class="w-full rounded-md border border-blue-200 px-3 py-2 text-sm text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200">
+
+                                <label class="block text-xs font-semibold uppercase tracking-wide text-blue-800">
+                                    Delivery Location
+                                </label>
+
+                                <select name="location"
+                                        class="w-full rounded-md border border-blue-200 px-3 py-2 text-sm text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200">
                                     <option value="Bungoma">Bungoma</option>
                                     <option value="Kakamega">Kakamega</option>
                                     <option value="Misikhu">Misikhu</option>
                                     <option value="Kitale">Kitale</option>
                                     <option value="Kimilili">Kimilili</option>
-                                    <option value="Busia">Busia</option>
                                     <option value="Webuye">Webuye</option>
+                                    <option value="Busia">Busia</option>
                                     <option value="Other">Other</option>
                                 </select>
-                                <p class="text-xs text-gray-600">Final quote will be confirmed on WhatsApp</p>
-                                <button type="submit" class="quote-send-btn inline-flex w-full items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-blue-700">
+
+                                <p class="text-xs text-gray-600">
+                                    Final quote will be confirmed on WhatsApp
+                                </p>
+
+                                <!-- SMART SUBMIT -->
+                                <button type="submit"
+                                        class="quote-send-btn w-full inline-flex items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-xs font-semibold text-white hover:bg-blue-700 transition">
                                     Request Quote on WhatsApp
                                 </button>
                             </form>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -517,7 +805,7 @@
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-gray-900 mb-3">What Our Customers Say</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Feedback from clients across Western Kenya and beyond. Replace these placeholders with real customer stories anytime.</p>
+                <p class="text-gray-600 max-w-2xl mx-auto">Feedback from clients across Western Kenya and beyond.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -618,10 +906,10 @@
                 </figure>
 
                 <figure class="group relative overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 shadow-sm">
-                    <a href="images/bricks.jpeg" class="delivery-lightbox-trigger block h-full w-full" data-caption="Duplex shell build - Kimilili - 30 tonnes shaped bricks">
-                        <img src="images/bricks.jpeg" alt="Duplex shell build delivery in Kimilili" class="h-full w-full object-cover transition duration-500 group-hover:scale-105">
+                    <a href="images/dressed-bushstones.jpeg" class="delivery-lightbox-trigger block h-full w-full" data-caption="Duplex shell build - Kimilili - 30 tonnes dressed bushstones">
+                        <img src="images/dressed-bushstones.jpeg" alt="Duplex shell build delivery in Kimilili" class="h-full w-full object-cover transition duration-500 group-hover:scale-105">
                     </a>
-                    <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-3 text-xs text-white">Duplex shell build - Kimilili - 30 tonnes shaped bricks</figcaption>
+                    <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-3 text-xs text-white">Duplex shell build - Kimilili - 30 tonnes dressed bushstones</figcaption>
                 </figure>
 
                 <figure class="group relative overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 shadow-sm lg:col-span-2">
