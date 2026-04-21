@@ -3,132 +3,240 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Inter for body, Poppins for Headings -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  
   <!-- Iconify Icons -->
   <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Custom Config for Tailwind -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Poppins', 'sans-serif'],
+          },
+          colors: {
+            whatsapp: {
+              DEFAULT: '#25D366',
+              dark: '#128C7E',
+              hover: '#1ebc57'
+            }
+          }
+        }
+      }
+    }
+  </script>
 
   <!-- SEO -->
   <title>Concrete Poles Supplier in Western Kenya | Kamukuywa</title>
-  <meta name="description" content="Durable concrete poles for fencing and construction in Bungoma, Kitale, and Western Kenya. Long-lasting, termite-proof, and weather-resistant. Request a quote today.">
+  <meta name="description" content="Durable concrete poles for fencing and construction in Bungoma, Kitale, and Western Kenya. Long-lasting, termite-proof, and weather-resistant.">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Concrete Poles Supplier in Western Kenya | Kamukuywa">
   <meta property="og:description" content="Strong, long-lasting concrete poles for fencing and construction. Delivered across Western Kenya.">
   <meta property="og:image" content="../images/poles1.jpeg">
-  <meta property="og:type" content="website">
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/public/style.css">
 </head>
 
-<body class="bg-white">
+<body class="bg-slate-50 text-gray-800 antialiased">
 
-  <!-- PAGE TITLE -->
-  <section class="px-6 py-10">
-    <h1 class="text-3xl font-bold text-gray-900 mb-6">
-      Concrete Poles Supplier in Western Kenya
-    </h1>
+  <!-- CONTAINER -->
+  <main class="max-w-4xl mx-auto px-6 py-12">
+    
+    <!-- PAGE TITLE -->
+    <header class="mb-10 text-center sm:text-left animate-fade-in-down">
+      <span class="inline-block py-1 px-3 rounded-full bg-red-100 text-red-700 text-xs font-bold uppercase tracking-wider mb-3">
+        Long-Lasting Security
+      </span>
+      <h1 class="text-4xl md:text-5xl font-heading font-bold text-gray-900 leading-tight">
+        Concrete Poles Supplier in <br class="hidden sm:block">
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-400">Western Kenya</span>
+      </h1>
+    </header>
 
-    <!-- YOUR ORIGINAL CARD -->
-    <div class="border border-gray-200 rounded-xl overflow-hidden group hover:shadow-lg transition product-card" data-unit-label="poles">
+    <!-- PRODUCT CARD -->
+    <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:shadow-2xl border border-gray-100">
       
-      <div class="h-48 bg-gray-100 overflow-hidden flex items-center justify-center">
-        <img src="../images/poles1.jpeg" alt="Concrete poles for fencing and construction in Kenya" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+      <!-- Image Section with Overlay Zoom -->
+      <div class="relative h-64 sm:h-80 overflow-hidden group">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
+        
+        <img src="/public/images/poles1.jpeg" 
+             alt="Concrete poles for fencing and construction in Kenya" 
+             onerror="this.src='https://images.unsplash.com/photo-1590559899731-a38283999514?q=80&w=2000&auto=format&fit=crop';this.onerror=null;"
+             class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out">
+        
+        <div class="absolute bottom-4 left-4 z-20 text-white">
+          <span class="bg-red-600 px-3 py-1 rounded-md text-xs font-bold shadow-lg flex items-center gap-1">
+            <span class="iconify" data-icon="heroicons-solid:shield-check"></span>
+            Termite Proof
+          </span>
+        </div>
       </div>
 
-      <div class="p-6 space-y-4">
-        <h2 class="text-lg font-bold text-gray-900">Concrete Poles</h2>
+      <!-- Content Section -->
+      <div class="p-8">
+        <div class="flex justify-between items-start mb-4">
+          <h2 class="text-2xl font-heading font-bold text-gray-900">Concrete Poles</h2>
+          <div class="bg-red-50 text-red-700 px-3 py-1 rounded-full text-xs font-bold border border-red-100">
+            Reinforced
+          </div>
+        </div>
 
-        <p class="text-sm text-gray-500">
+        <p class="text-gray-600 mb-8 leading-relaxed text-sm sm:text-base">
           Heavy-duty, weather-resistant concrete poles engineered to outlast wood and steel. 
           Termite-proof, fire-proof, and rot-proof — install once, forget for decades. 
           Ideal for fencing, perimeter security, and structural support across Western Kenya.
         </p>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        <!-- Action Buttons -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+          <!-- Main WhatsApp Order Button -->
           <a href="https://wa.me/254706706034?text=Hello%20I%20need%20Concrete%20Poles"
              target="_blank"
-             class="whatsapp-order-btn inline-flex items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-blue-700">
+             class="group relative inline-flex items-center justify-center rounded-xl bg-whatsapp px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-green-200 transition-all hover:bg-whatsapp-hover hover:-translate-y-0.5 hover:shadow-green-300">
+            <span class="iconify mr-2 text-lg group-hover:scale-110 transition-transform" data-icon="logos:whatsapp-icon"></span>
             Order on WhatsApp
           </a>
 
-          <button type="button" class="quote-toggle-btn inline-flex items-center justify-center rounded-md border border-blue-600 px-3 py-2 text-xs font-semibold text-blue-700 transition hover:bg-blue-50">
+          <!-- Get Quote Button -->
+          <button type="button" id="toggleQuoteBtn" class="inline-flex items-center justify-center rounded-xl border-2 border-whatsapp text-whatsapp-dark px-6 py-3.5 text-sm font-bold transition-all hover:bg-green-50 hover:-translate-y-0.5 active:scale-95">
+            <span class="iconify mr-2" data-icon="heroicons-solid:calculator"></span>
             Get Quote
           </button>
         </div>
 
-        <!-- QUOTE FORM -->
-        <form class="quote-inline-form hidden space-y-3 rounded-lg border border-blue-100 bg-blue-50 p-3">
-          
-          <label class="block text-xs font-semibold text-blue-800">Quantity</label>
+        <!-- COLLAPSIBLE QUOTE FORM -->
+        <div id="quoteFormContainer" class="hidden overflow-hidden transition-all duration-500 ease-in-out">
+          <div class="rounded-xl bg-slate-50 border border-slate-200 p-6 shadow-inner">
+            <h3 class="text-sm font-heading font-bold text-gray-800 mb-4 uppercase tracking-wide">Quick Quote Calculator</h3>
+            
+            <form id="quoteForm" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Quantity -->
+                <div>
+                  <label class="block text-xs font-semibold text-gray-500 mb-1">Quantity (Poles)</label>
+                  <div class="relative">
+                    <input type="number" name="quantity" id="quantity" min="1" value="1"
+                      class="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-semibold text-gray-800 focus:border-whatsapp focus:ring-2 focus:ring-green-100 outline-none transition-all">
+                    <span class="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-gray-400 pointer-events-none">
+                      Poles
+                    </span>
+                  </div>
+                </div>
 
-          <div class="relative">
-            <input type="number" name="quantity" min="1" value="1"
-              class="w-full rounded-md border px-3 py-2 pr-20 text-sm">
-            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-blue-700">
-              poles
-            </span>
+                <!-- Location -->
+                <div>
+                  <label class="block text-xs font-semibold text-gray-500 mb-1">Delivery Location</label>
+                  <div class="relative">
+                    <select name="location" id="location" class="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-semibold text-gray-800 focus:border-whatsapp focus:ring-2 focus:ring-green-100 outline-none appearance-none transition-all">
+                      <option>Bungoma</option>
+                      <option>Kakamega</option>
+                      <option>Kitale</option>
+                      <option>Webuye</option>
+                      <option>Eldoret</option>
+                    </select>
+                    <div class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
+                      <span class="iconify" data-icon="heroicons-solid:chevron-down"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit"
+                class="w-full rounded-lg bg-gray-900 px-4 py-3 text-sm font-bold text-white shadow-lg hover:bg-gray-800 transition-all active:scale-95 flex items-center justify-center gap-2">
+                <span>Request Quote</span>
+                <span class="iconify" data-icon="heroicons-solid:arrow-right"></span>
+              </button>
+            </form>
           </div>
+        </div>
 
-          <label class="block text-xs font-semibold text-blue-800">Delivery Location</label>
-
-          <select name="location" class="w-full rounded-md border px-3 py-2 text-sm">
-            <option>Bungoma</option>
-            <option>Kakamega</option>
-            <option>Kitale</option>
-            <option>Webuye</option>
-          </select>
-
-          <button type="submit"
-            class="w-full rounded-md bg-blue-600 px-3 py-2 text-xs text-white">
-            Request Quote on WhatsApp
-          </button>
-
-        </form>
       </div>
     </div>
-  </section>
 
-  <!-- USE CASES -->
-  <section class="px-6 py-6">
-    <h2 class="text-xl font-bold mb-3">Uses</h2>
-    <ul class="text-sm text-gray-700">
-      <li>Fencing and perimeter walls</li>
-      <li>Electric and security lines support</li>
-      <li>Farm and land boundary marking</li>
-      <li>Structural support in construction</li>
-    </ul>
-  </section>
+    <!-- USES SECTION (Specific to Concrete Poles) -->
+    <section class="mt-8 bg-white p-6 rounded-2xl shadow-md border border-gray-100">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="p-2 bg-red-100 rounded-lg text-red-600">
+          <span class="iconify text-xl" data-icon="heroicons-solid:home-modern"></span>
+        </div>
+        <h2 class="text-xl font-heading font-bold text-gray-900">Common Uses</h2>
+      </div>
+      <ul class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+        <li class="p-3 bg-slate-50 rounded-lg text-sm font-semibold text-gray-700">Fencing</li>
+        <li class="p-3 bg-slate-50 rounded-lg text-sm font-semibold text-gray-700">Perimeter Walls</li>
+        <li class="p-3 bg-slate-50 rounded-lg text-sm font-semibold text-gray-700">Electric Lines</li>
+        <li class="p-3 bg-slate-50 rounded-lg text-sm font-semibold text-gray-700">Farm Boundaries</li>
+      </ul>
+    </section>
 
-  <!-- DELIVERY -->
-  <section class="px-6 py-6">
-    <h2 class="text-xl font-bold mb-3">Delivery</h2>
-    <p class="text-sm text-gray-600">
-      We deliver concrete poles to Bungoma, Kakamega, Kitale, Webuye and surrounding areas. Delivery timelines depend on order size and location.
-    </p>
-  </section>
+    <!-- INFO GRID (Delivery & FAQ) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+      
+      <!-- Delivery -->
+      <section class="bg-white p-6 rounded-2xl shadow-md border border-gray-100 hover:border-green-200 transition-colors">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="p-2 bg-green-100 rounded-lg text-whatsapp-dark">
+            <span class="iconify text-xl" data-icon="heroicons-solid:truck"></span>
+          </div>
+          <h2 class="text-xl font-heading font-bold text-gray-900">Fast Delivery</h2>
+        </div>
+        <p class="text-sm text-gray-600 leading-relaxed">
+          We deliver concrete poles to <strong>Bungoma, Kakamega, Kitale, Webuye</strong> and surrounding areas. We use specialized transport to ensure poles arrive intact. Delivery timelines depend on order size and location.
+        </p>
+      </section>
 
-  <!-- FAQ -->
-  <section class="px-6 py-6">
-    <h2 class="text-xl font-bold mb-3">FAQs</h2>
+      <!-- FAQ -->
+      <section class="bg-white p-6 rounded-2xl shadow-md border border-gray-100 hover:border-blue-200 transition-colors">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="p-2 bg-blue-100 rounded-lg text-blue-600">
+            <span class="iconify text-xl" data-icon="heroicons-solid:question-mark-circle"></span>
+          </div>
+          <h2 class="text-xl font-heading font-bold text-gray-900">Common Questions</h2>
+        </div>
+        <ul class="text-sm text-gray-600 space-y-3">
+          <li class="flex gap-2">
+            <span class="iconify text-gray-400" data-icon="heroicons-solid:check"></span>
+            <span><strong class="text-gray-800">Reinforced?</strong> Yes, built with steel for strength.</span>
+          </li>
+          <li class="flex gap-2">
+            <span class="iconify text-gray-400" data-icon="heroicons-solid:check"></span>
+            <span><strong class="text-gray-800">Weather resistant?</strong> Yes, rain and sun proof.</span>
+          </li>
+          <li class="flex gap-2">
+            <span class="iconify text-gray-400" data-icon="heroicons-solid:check"></span>
+            <span><strong class="text-gray-800">Bulk orders?</strong> Yes, we supply large projects.</span>
+          </li>
+        </ul>
+      </section>
 
-    <p><strong>Are the poles reinforced?</strong><br>Yes, they are reinforced for strength and durability.</p>
+    </div>
 
-    <p><strong>Do they resist weather damage?</strong><br>Yes, they are designed to withstand rain, sun, and harsh conditions.</p>
+    <!-- RELATED PRODUCTS -->
+    <section class="mt-8">
+      <h2 class="text-lg font-heading font-bold text-gray-900 mb-4">Related Products</h2>
+      <div class="flex flex-wrap gap-3">
+        <a href="dressed-bushstones.html" class="px-5 py-2 rounded-full bg-white border border-gray-200 text-sm font-semibold text-gray-600 hover:text-whatsapp-dark hover:border-whatsapp hover:shadow-md transition-all">
+          dressed bushstones
+        </a>
+        <a href="wall-copings.html" class="px-5 py-2 rounded-full bg-white border border-gray-200 text-sm font-semibold text-gray-600 hover:text-whatsapp-dark hover:border-whatsapp hover:shadow-md transition-all">
+          Wall Copings
+        </a>
+      </div>
+    </section>
 
-    <p><strong>Can I order in bulk?</strong><br>Yes, we supply both small and large quantities.</p>
-  </section>
-
-  <!-- RELATED PRODUCTS -->
-  <section class="px-6 py-6">
-    <h2 class="text-xl font-bold mb-3">Related Products</h2>
-    <ul class="text-blue-600 text-sm">
-      <li><a href="shaped-bricks.html">Shaped Bricks</a></li>
-      <li><a href="wall-copings.html">Wall Copings</a></li>
-    </ul>
-  </section>
+  </main>
 
   <!-- STRUCTURED DATA -->
   <script type="application/ld+json">
@@ -143,6 +251,41 @@
       "priceCurrency": "KES"
     }
   }
+  </script>
+
+  <!-- INTERACTIVE JAVASCRIPT -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleBtn = document.getElementById('toggleQuoteBtn');
+      const quoteFormContainer = document.getElementById('quoteFormContainer');
+      const quoteForm = document.getElementById('quoteForm');
+      
+      // Toggle Form with smooth animation
+      toggleBtn.addEventListener('click', () => {
+        if (quoteFormContainer.classList.contains('hidden')) {
+          quoteFormContainer.classList.remove('hidden');
+          setTimeout(() => {
+            quoteFormContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }, 100);
+        } else {
+          quoteFormContainer.classList.add('hidden');
+        }
+      });
+
+      // Handle Quote Submission
+      quoteForm.addEventListener('submit', (e) => {
+        e.preventDefault(); 
+        
+        const quantity = document.getElementById('quantity').value;
+        const location = document.getElementById('location').value;
+        const phoneNumber = "254706706034";
+
+        const text = `Hello, I would like a quote for Concrete Poles.%0A%0A*Quantity:* ${quantity} poles%0A*Location:* ${location}`;
+        
+        // Open WhatsApp
+        window.open(`https://wa.me/${phoneNumber}?text=${text}`, '_blank');
+      });
+    });
   </script>
 
 </body>
