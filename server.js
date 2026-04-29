@@ -7,10 +7,18 @@ const nodemailer = require('nodemailer');
 const app = express();
 const PORT = process.env.PORT || 30001;
 const EMAIL_HEADER_INJECTION_PATTERN = /[\r\n]/;
+const isSitePaused = process.env.SITE_PAUSED === 'true';
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+if (isSitePaused) {
+    app.use((req, res) => {
+        res.status(503).sendFile(path.join(__dirname, 'public', 'maintenance.html'));
+    });
+}
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 // --- EMAIL CONFIGURATION ---
