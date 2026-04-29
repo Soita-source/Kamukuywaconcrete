@@ -11,10 +11,15 @@
             }
 
             function buildQuoteWhatsAppMessage(productName, quantity, unitLabel, location, subtotalText) {
-                return "Hi Kamukuywa Concrete, I'd like a quote for " + productName +
+                const baseMessage = "Hi Kamukuywa Concrete, I'd like a quote for " + productName +
                     ". Quantity: " + quantity + " " + unitLabel +
-                    ", Delivery location: " + location +
-                    ", Subtotal: " + subtotalText + ".";
+                    ", Delivery location: " + location;
+
+                if (subtotalText) {
+                    return baseMessage + ", Subtotal: " + subtotalText + ".";
+                }
+
+                return baseMessage + ", Please share the current unit price.";
             }
 
             document.querySelectorAll('.product-card').forEach(function (card) {
@@ -22,7 +27,9 @@
                 if (!productNameElement) return;
 
                 const productName = productNameElement.textContent.trim();
-                const unitPrice = Number(card.dataset.unitPrice || '0');
+                const parsedUnitPrice = Number(card.dataset.unitPrice);
+                const hasUnitPrice = Number.isFinite(parsedUnitPrice) && parsedUnitPrice > 0;
+                const unitPrice = hasUnitPrice ? parsedUnitPrice : 0;
                 const unitLabel = String(card.dataset.unitLabel || 'units').trim();
                 const orderButton = card.querySelector('.whatsapp-order-btn');
                 const quoteButton = card.querySelector('.quote-toggle-btn');
@@ -42,7 +49,9 @@
                 function updateSubtotal() {
                     if (!subtotalElement) return;
                     const values = calculateSubtotal();
-                    subtotalElement.textContent = formatKes(values.subtotal);
+                    subtotalElement.textContent = hasUnitPrice
+                        ? formatKes(values.subtotal)
+                        : 'Price to be confirmed';
                 }
 
                 if (orderButton) {
@@ -99,7 +108,7 @@
                         event.preventDefault();
 
                         const values = calculateSubtotal();
-                        const subtotalText = formatKes(values.subtotal);
+                        const subtotalText = hasUnitPrice ? formatKes(values.subtotal) : '';
                         const locationValue = locationSelect && locationSelect.value
                             ? locationSelect.value
                             : 'Other';

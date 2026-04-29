@@ -9,11 +9,19 @@
     const subjectParam = urlParams.get('subject');
     if (subjectParam) {
         const subjectSelect = document.getElementById('subject');
-        // Simple check to see if the value exists, otherwise keep default
-        for (let i = 0; i < subjectSelect.options.length; i++) {
-            if (subjectSelect.options[i].value === subjectParam) {
-                subjectSelect.selectedIndex = i;
-                break;
+        if (subjectSelect && subjectSelect.options) {
+            // Simple check to see if the value exists, otherwise keep default
+            for (let i = 0; i < subjectSelect.options.length; i++) {
+                if (subjectSelect.options[i].value === subjectParam) {
+                    subjectSelect.selectedIndex = i;
+                    break;
+                }
+            }
+        } else {
+            // Fallback for current contact form, which uses a free-text product field.
+            const productInput = document.getElementById('product');
+            if (productInput && !productInput.value) {
+                productInput.value = subjectParam;
             }
         }
     }
